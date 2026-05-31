@@ -1,0 +1,17 @@
+\documentclass[tikz,border=2mm]{standalone}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[xlabel={$E$},ylabel={$Q_3^L(E)$},ymin=0,ymax=3.6,legend pos=south east,grid=both]
+\addplot coordinates {(0.002,3) (0.004,3) (0.008,3) (0.016,3) (0.032,3) (0.064,3) (0.128,3)};
+\addlegendentry{limit $3$}
+\addplot coordinates {(0.002,0.000) (0.004,0.000) (0.008,2.734) (0.016,1.722) (0.032,2.170) (0.064,2.734) (0.128,2.584)};
+\addlegendentry{$L=100$}
+\addplot coordinates {(0.002,2.296) (0.004,2.894) (0.008,2.734) (0.016,2.871) (0.032,2.893) (0.064,2.962) (0.128,2.871)};
+\addlegendentry{$L=300$}
+\addplot coordinates {(0.002,2.756) (0.004,2.604) (0.008,2.734) (0.016,2.928) (0.032,2.930) (0.064,2.939) (0.128,2.971)};
+\addlegendentry{$L=1000$}
+\end{axis}
+\end{tikzpicture}
+\end{document}
