@@ -1,0 +1,17 @@
+\documentclass[tikz,border=2mm]{standalone}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[xlabel={$|\xi|$},ylabel={multiplicity-three centered loss},legend pos=north west,grid=both]
+\addplot coordinates {(0.01,0.001250) (0.02,0.003537) (0.04,0.010013) (0.08,0.028386) (0.16,0.080839) (0.32,0.233663) (0.50,0.475230)};
+\addlegendentry{root 1 of $gI_3-N_3$}
+\addplot coordinates {(0.01,0.001250) (0.02,0.003537) (0.04,0.010013) (0.08,0.028386) (0.16,0.080839) (0.32,0.233663) (0.50,0.475230)};
+\addlegendentry{root 2 of $gI_3-N_3$}
+\addplot coordinates {(0.01,0.001250) (0.02,0.003537) (0.04,0.010013) (0.08,0.028386) (0.16,0.080839) (0.32,0.233663) (0.50,0.475230)};
+\addlegendentry{root 3 of $gI_3-N_3$}
+\addplot coordinates {(0.01,0.001250) (0.02,0.003536) (0.04,0.010000) (0.08,0.028284) (0.16,0.080000) (0.32,0.226274) (0.50,0.441942)};
+\addlegendentry{$a_\tau|\xi|^\alpha$}
+\end{axis}
+\end{tikzpicture}
+\end{document}
