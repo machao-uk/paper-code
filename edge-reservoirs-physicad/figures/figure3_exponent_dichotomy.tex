@@ -1,0 +1,13 @@
+\documentclass[tikz,border=2mm]{standalone}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\begin{document}
+\begin{tikzpicture}
+\begin{loglogaxis}[xlabel={$E$ or stable-side budget},ylabel={reservoir density},legend pos=north west,grid=both]
+\addplot coordinates {(0.002,0.013062) (0.004,0.020736) (0.008,0.032916) (0.016,0.052254) (0.032,0.082947) (0.064,0.131670) (0.128,0.209013)};
+\addlegendentry{coherent subcritical $E^{1/\alpha}$}
+\addplot coordinates {(0.002,0.000005) (0.004,0.000020) (0.008,0.000082) (0.016,0.000326) (0.032,0.001304) (0.064,0.005215) (0.128,0.020860)};
+\addlegendentry{stable Puiseux $E^{3/\alpha}$}
+\end{loglogaxis}
+\end{tikzpicture}
+\end{document}
