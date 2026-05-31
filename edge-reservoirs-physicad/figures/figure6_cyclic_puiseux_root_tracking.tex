@@ -1,0 +1,13 @@
+\documentclass[tikz,border=2mm]{standalone}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\begin{document}
+\begin{tikzpicture}
+\begin{loglogaxis}[xlabel={$|\xi|$},ylabel={stable Puiseux loss},legend pos=north west,grid=both]
+\addplot coordinates {(0.0001,0.006251) (0.0002,0.008842) (0.0005,0.013989) (0.001,0.019804) (0.002,0.028063) (0.005,0.044636) (0.01,0.063750)};
+\addlegendentry{tracked stable branch}
+\addplot coordinates {(0.0001,0.006250) (0.0002,0.008839) (0.0005,0.013975) (0.001,0.019764) (0.002,0.027951) (0.005,0.044194) (0.01,0.062500)};
+\addlegendentry{slope guide}
+\end{loglogaxis}
+\end{tikzpicture}
+\end{document}
