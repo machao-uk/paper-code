@@ -1,0 +1,18 @@
+Expected output from:
+
+python physicaD_v42_root_tracking_protocol.py
+
+---
+
+Scalar delayed branch losses:
+xi=0.01 loss=0.00125019546 leading=0.00125
+xi=0.02 loss=0.00353709964 leading=0.00353553391
+xi=0.04 loss=0.0100125734 leading=0.01
+xi=0.08 loss=0.0283859513 leading=0.0282842712
+xi=0.16 loss=0.0808393389 leading=0.08
+xi=0.32 loss=0.233663106 leading=0.22627417
+xi=0.5 loss=0.475230306 leading=0.441941738
+
+Least-squares slopes over [1e-4, 1e-2]:
+coherent slope=1.500 predicted=1.500
+cyclic EP3 stable slope=0.504 predicted=0.500
