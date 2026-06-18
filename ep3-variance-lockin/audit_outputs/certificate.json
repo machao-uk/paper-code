@@ -1,0 +1,36 @@
+{
+  "certificate": {
+    "q_out": {
+      "passed": true,
+      "reason": "symmetric finite jitter remains in the declared outer window"
+    },
+    "q_sym": {
+      "passed": true,
+      "reason": "two-point jitter has zero third central moment"
+    },
+    "q_width": {
+      "passed": true,
+      "threshold": 0.08,
+      "observed": 6.411212986723314e-06
+    },
+    "q_pow": {
+      "passed": true,
+      "reason": "synthetic benchmark is generated in the linear phase-diffusion regime"
+    },
+    "q_EP2": {
+      "passed": true,
+      "threshold": 0.12,
+      "observed": 3.000000000001018
+    },
+    "q_null": {
+      "passed": false,
+      "reason": "null detector has no singular linewidth coefficient and is rejected",
+      "observed_slope": 1.767976684393816e-09
+    },
+    "q_regular_background": {
+      "passed": false,
+      "reason": "regular-only background does not produce the EP3 curvature exponent",
+      "observed_slope": 0.1972416527850569
+    }
+  }
+}

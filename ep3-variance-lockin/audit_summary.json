@@ -109,10 +109,30 @@
       0.011999999987893289,
       0.011999999991236958
     ],
+    "variance_lockin_regular_background": [
+      0.015250451364708555,
+      0.015131325244530248,
+      0.014993338060004496,
+      0.014833543136341876,
+      0.014648556779042839,
+      0.014434504182630094,
+      0.014186969732584277,
+      0.01390095176643927,
+      0.013570833585750617,
+      0.01319038732709323,
+      0.012752830270403396,
+      0.012250976522754815,
+      0.011677540352618894,
+      0.011025683153562464,
+      0.010289939871406927,
+      0.009467727160877648
+    ],
     "alpha_EP3": 3.3317672986628915,
     "delta_alpha_EP3": 0.029373492236115312,
     "alpha_EP2": 3.000000000001018,
     "delta_alpha_EP2": 0.029373492236115312,
+    "alpha_null_channel": 1.767976684393816e-09,
+    "alpha_regular_background": 0.1972416527850569,
     "width_pair_slope_difference": 6.411212986723314e-06,
     "raw_linewidth_apparent_slope": 2.5775352544946104
   },
@@ -127,7 +147,8 @@
     },
     "q_width": {
       "passed": true,
-      "threshold": 0.08
+      "threshold": 0.08,
+      "observed": 6.411212986723314e-06
     },
     "q_pow": {
       "passed": true,
@@ -135,11 +156,18 @@
     },
     "q_EP2": {
       "passed": true,
-      "threshold": 0.12
+      "threshold": 0.12,
+      "observed": 3.000000000001018
     },
     "q_null": {
       "passed": false,
-      "reason": "null detector has no singular linewidth coefficient and is rejected"
+      "reason": "null detector has no singular linewidth coefficient and is rejected",
+      "observed_slope": 1.767976684393816e-09
+    },
+    "q_regular_background": {
+      "passed": false,
+      "reason": "regular-only background does not produce the EP3 curvature exponent",
+      "observed_slope": 0.1972416527850569
     }
   }
 }

@@ -1,0 +1,27 @@
+{
+  "random_seed": 20260526,
+  "jitter_model": "symmetric two-point jitter around each mean detuning",
+  "distribution": "0.5 delta(mu - sigma) + 0.5 delta(mu + sigma)",
+  "central_moments": {
+    "mean_shift": 0.0,
+    "variance": "sigma^2",
+    "third_central_moment": 0.0,
+    "fourth_central_moment": "sigma^4"
+  },
+  "width_pairs": [
+    {
+      "name": "A",
+      "sigma_over_mu_1": 0.03,
+      "sigma_over_mu_2": 0.06
+    },
+    {
+      "name": "B",
+      "sigma_over_mu_1": 0.04,
+      "sigma_over_mu_2": 0.08
+    }
+  ],
+  "symmetry_gate": {
+    "passed": true,
+    "reason": "The two-point jitter distribution has exactly zero third central moment."
+  }
+}
