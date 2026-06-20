@@ -1,0 +1,13 @@
+{
+  "V0": 1.0,
+  "rho0": 0.3,
+  "beta": 0.5,
+  "tau0_for_response_plot": 0.85,
+  "normal_D_over_V0_at_tau0": 0.4588771258990136,
+  "ep3_D_over_V0_at_tau0": 0.8297507624475856,
+  "normal_gap_at_tau0": 0.5411228741009864,
+  "ep3_gap_at_tau0": 0.1702492375524144,
+  "tau_normal_criterion": 2.407934767704229,
+  "tau_ep3_criterion": 1.009261492000934,
+  "note": "The response plot uses tau0=0.85, where both channels satisfy D_tau < V0. The delay-scan indicators are algebraic functions of the admissibility gap, and the tail plot is schematic rather than a PDE computation."
+}
