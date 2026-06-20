@@ -1,4 +1,4 @@
-# jdde-narwa-mkdv
+# jdde-mkdv
 
 Figure-generation script for the delayed fractional vector mKdV paper (non-normal delay amplification, modified $H^2$ Lyapunov closure, zero-history attraction; candidate journal: JDDE).
 

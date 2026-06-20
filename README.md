@@ -6,4 +6,4 @@ Reproducibility code, figures, and audit artifacts for Chao Ma’s research pape
 
 - [`ep3-variance-lockin`](ep3-variance-lockin/) — reproducibility code and audit data for *Variance-lock-in spectroscopy of exceptional-point eigenvector curvature*.
 - [`edge-reservoirs-physicad`](edge-reservoirs-physicad/) — root-tracking protocol and diagnostic notes for *Edge-Reservoir Geometry, Tauberian Relaxation, and Pseudospectral Gain in Fractional Delayed Fields*.
-- [`jdde-narwa-mkdv`](jdde-narwa-mkdv/) — figure-generation script for the delayed fractional vector mKdV paper (candidate journal: JDDE).
+- [`jdde-mkdv`](jdde-mkdv/) — figure-generation script for the delayed fractional vector mKdV paper (candidate journal: JDDE).
