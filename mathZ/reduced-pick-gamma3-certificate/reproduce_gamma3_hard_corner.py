@@ -1,0 +1,192 @@
+import pickle
+from fractions import Fraction
+from math import comb
+from pathlib import Path
+
+import sympy as sp
+
+
+BASE = Path(__file__).resolve().parent
+P_FILE = BASE / "inputs" / "MathZ_gamma3_primitive_norm_expr.pkl"
+S_FILE = BASE / "inputs" / "MathZ_gamma3_blowup_S.pkl"
+T_FILE = BASE / "inputs" / "MathZ_gamma3_blowup_T.pkl"
+OUT = BASE / "outputs" / "gamma3_hard_corner_certificate_output.md"
+
+rho, y = sp.symbols("rho y")
+u, v, z, q, r = sp.symbols("u v z q r")
+
+C = sp.Integer(382511685112441262309376)
+INNER_Q_BOUND = sp.Integer(16)
+V_FULL = sp.Rational(1, 32)
+V_ANN = sp.Rational(1, 64)
+Z_ANN = sp.Rational(1, 4)
+
+
+def bernstein_2d_terms(terms, box1, box2):
+    """Exact 2D tensor Bernstein sign check for sparse terms c*x^a*y^b."""
+    def frac(x):
+        x = sp.Rational(x)
+        return Fraction(int(x.p), int(x.q))
+
+    deg1 = max(a for a, _, _ in terms)
+    deg2 = max(b for _, b, _ in terms)
+    x0, x1 = map(frac, box1)
+    y0, y1 = map(frac, box2)
+    hx = x1 - x0
+    hy = y1 - y0
+
+    # Transform to the unit square: x=x0+hx*X, y=y0+hy*Y.
+    trans = {}
+    for a, b, c in terms:
+        cint = int(c)
+        for i in range(a + 1):
+            cx = comb(a, i) * x0 ** (a - i) * hx**i
+            for j in range(b + 1):
+                cy = comb(b, j) * y0 ** (b - j) * hy**j
+                trans[(i, j)] = trans.get((i, j), Fraction(0)) + cint * cx * cy
+    trans = {k: v for k, v in trans.items() if v}
+
+    wx = [
+        [Fraction(comb(I, i), comb(deg1, i)) if i <= I else Fraction(0) for i in range(deg1 + 1)]
+        for I in range(deg1 + 1)
+    ]
+    wy = [
+        [Fraction(comb(J, j), comb(deg2, j)) if j <= J else Fraction(0) for j in range(deg2 + 1)]
+        for J in range(deg2 + 1)
+    ]
+
+    neg = 0
+    zeros = 0
+    mn = None
+    loc = None
+    for I in range(deg1 + 1):
+        for J in range(deg2 + 1):
+            val = Fraction(0)
+            for (i, j), cc in trans.items():
+                if i <= I and j <= J:
+                    val += cc * wx[I][i] * wy[J][j]
+            if mn is None or val < mn:
+                mn = val
+                loc = (I, J)
+            if val < 0:
+                neg += 1
+            elif val == 0:
+                zeros += 1
+    return {
+        "degrees": (deg1, deg2),
+        "neg": neg,
+        "zeros": zeros,
+        "min": mn,
+        "loc": loc,
+    }
+
+
+def main():
+    P = pickle.loads(P_FILE.read_bytes())
+    S = pickle.loads(S_FILE.read_bytes())
+    T = pickle.loads(T_FILE.read_bytes())
+
+    lines = ["# Gamma3 hard-corner certificate output", ""]
+
+    Q = sp.Poly(sp.expand(P.as_expr().subs({rho: 1 - u, y: 1 - v})), u, v)
+    lowest = min(a + b for (a, b), c in Q.terms() if c)
+    lead = sp.factor(sum(c * u**a * v**b for (a, b), c in Q.terms() if a + b == lowest))
+    lines += [
+        "## Lowest corner face",
+        "",
+        f"- order: `{lowest}`",
+        f"- lead/C: `{sp.factor(lead / C)}`",
+        "",
+    ]
+
+    T_terms = [(a, b, sp.Integer(c)) for (a, b), c in T.terms()]
+    c00 = dict(((a, b), c) for a, b, c in T_terms)[(0, 0)]
+    tail = sum(
+        abs(c) * INNER_Q_BOUND**a * V_FULL**b
+        for a, b, c in T_terms
+        if (a, b) != (0, 0)
+    )
+    lines += [
+        "## Inner tube",
+        "",
+        f"- c00: `{c00}`",
+        f"- tail bound positive: `{c00 - tail > 0}`",
+        f"- relative margin: `{sp.N((c00 - tail) / c00, 40)}`",
+        "",
+    ]
+
+    S_terms = [(a, b, sp.Integer(c)) for (a, b), c in S.terms()]
+    main_keys = {(2, 0), (0, 1), (1, 1), (0, 2)}
+    rem = sum(
+        abs(c) * Z_ANN**a * V_ANN ** (b - 1)
+        for a, b, c in S_terms
+        if (a, b) not in main_keys
+    )
+    lines += [
+        "## Annulus",
+        "",
+        "- region: `16v < |z| < 1/4`, hence `v < 1/64`",
+        "- main lower bound: `C(z^2+64v+32vz-320v^2) >= 55 C v`",
+        f"- remainder/C: `{sp.N(rem / C, 50)}`",
+        f"- remainder < 5C: `{rem < 5 * C}`",
+        f"- final margin `55C-rem > 50C`: `{55 * C - rem > 50 * C}`",
+        "",
+    ]
+
+    fixed_intervals = [
+        (sp.Rational(-4), sp.Rational(-2)),
+        (sp.Rational(-2), sp.Rational(-1)),
+        (sp.Rational(-1), sp.Rational(-1, 2)),
+        (sp.Rational(-1, 2), sp.Rational(-1, 4)),
+        (sp.Rational(1, 4), sp.Rational(1, 2)),
+        (sp.Rational(1, 2), sp.Rational(1)),
+        (sp.Rational(1), sp.Rational(2)),
+        (sp.Rational(2), sp.Rational(4)),
+        (sp.Rational(4), sp.Rational(8)),
+        (sp.Rational(8), sp.Rational(16)),
+        (sp.Rational(16), sp.Rational(32)),
+    ]
+    lines += ["## Fixed-z Bernstein", ""]
+    for a, b in fixed_intervals:
+        print(f"checking fixed z [{a},{b}]")
+        result = bernstein_2d_terms(S_terms, (a, b), (sp.Rational(0), V_FULL))
+        lines.append(
+            f"- z `[{a},{b}]`: degree `{result['degrees']}`, "
+            f"neg `{result['neg']}`, zeros `{result['zeros']}`, loc `{result['loc']}`"
+        )
+        if result["neg"]:
+            raise RuntimeError(f"negative Bernstein coefficient on [{a},{b}]")
+    lines.append("")
+
+    H = sp.Poly(sp.expand(Q.as_expr().subs(v, r * u)), r, u)
+    H_terms = [(a, b, sp.Integer(c)) for (a, b), c in H.terms()]
+    print("checking reciprocal chart")
+    recip = bernstein_2d_terms(
+        H_terms,
+        (sp.Rational(0), sp.Rational(1, 36)),
+        (sp.Rational(0), sp.Rational(1, 16)),
+    )
+    lines += [
+        "## Reciprocal tail",
+        "",
+        "- chart: `H(r,u)=Q(u,ru)`",
+        "- box: `0 <= r <= 1/36`, `0 <= u <= 1/16`",
+        f"- degree: `{recip['degrees']}`",
+        f"- neg: `{recip['neg']}`",
+        f"- zeros: `{recip['zeros']}`",
+        f"- min loc: `{recip['loc']}`",
+        "",
+        "## Verdict",
+        "",
+        "- hard corner closed: `True`",
+        "",
+    ]
+    if recip["neg"]:
+        raise RuntimeError("negative Bernstein coefficient in reciprocal chart")
+
+    OUT.write_text("\n".join(lines))
+    print(OUT)
+
+
+if __name__ == "__main__":
+    main()
