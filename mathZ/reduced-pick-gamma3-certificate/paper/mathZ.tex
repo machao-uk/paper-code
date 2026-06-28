@@ -161,7 +161,8 @@ generically a finite set of isolated exceptional points (complex-valued
 \(\Delta\)) or an embedded curve (real-valued \(\Delta\)), and two
 versions of the stability theorem cover the cases \(M_{\bbT^2}>0\) and
 \(C\neq\varnothing\) separately.
-Propositions~\ref{prop:T2-no-puncture}--\ref{prop:T2-two-punctures}
+Proposition~\ref{prop:T2-no-puncture} and
+Remark~\ref{rem:T2-degenerate-three-zero}
 work out explicit families \(H=gM\) whose braid monodromy maps
 \(\pi_1(\bbT^2)\) and \(\pi_1(\bbT^2\setminus C)\) into the centre
 \(Z(B_3)\), with complete Zariski--van Kampen verification.
@@ -421,14 +422,9 @@ rank-one defect model \(S_B\).  The reduced Pick matrix is positive
 semidefinite on the centered four-point disk by
 Proposition~\ref{prop:interior-machine-certificate}.  Identity
 \eqref{eq:reduced-pick-recursion} therefore implies positivity of the original
-Pick matrix \eqref{eq:quartic-pick-matrix}.  The finite Nevanlinna--Pick theorem and
-Sarason's lifting theorem then give
-\(\|c_1S_B+c_2S_B^2+c_3S_B^3\|_2\le768\), hence
-\[
-  \|c_1S_B+c_2S_B^2+c_3S_B^3\|_*
-  \le4\|c_1S_B+c_2S_B^2+c_3S_B^3\|_2
-  \le3072 .
-\]
+Pick matrix \eqref{eq:quartic-pick-matrix}.  Proposition~\ref{prop:pick-to-3072}
+then gives the required norm bound
+\(\|c_1S_B+c_2S_B^2+c_3S_B^3\|_*\le3072\).
 Scaling gives the factor \(R^{11}\).
 \end{proof}
 
@@ -704,40 +700,85 @@ limit giving the square spectrum.
 \smallskip
 
 
+\begin{proposition}[Trace-zero complex extreme reduction]
+\label{prop:trace-zero-extreme-reduction}
+Let
+\[
+  \mathcal B_0=\{T\in M_4(\bbC):\operatorname{tr}T=0,\ \|T\|_2\le1\}.
+\]
+For the quartic extremal problem it is enough to consider the following
+boundary models:
+\begin{enumerate}[(i)]
+\item unitary trace-zero matrices, already covered by the normal all-boundary
+estimate;
+\item matrices with a unitary direct summand, which lie on the boundary or
+confluent strata treated separately;
+\item completely non-unitary contractions with defect indices \((1,1)\), hence
+compressed shifts \(S_B\) for degree-four Blaschke products with centred zeros.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+For fixed trace-zero coefficient data, the map
+\[
+  T\longmapsto A(T)=c_1T+c_2T^2+c_3T^3
+\]
+is holomorphic and \(\|A(T)\|_*\) is plurisubharmonic on the trace-zero affine
+space because
+\[
+  \|A(T)\|_*=\sup_{\|Y\|\le1}|\operatorname{tr}(Y^*A(T))|.
+\]
+Thus its maximum on \(\mathcal B_0\) is attained on the complex extreme
+boundary of \(\mathcal B_0\).
+
+Let \(T\in\mathcal B_0\) be a non-unitary complex extreme point and put
+\[
+  D_L=(I-TT^*)^{1/2},\qquad D_R=(I-T^*T)^{1/2}.
+\]
+The Schur--Julia parametrisation of a neighbourhood of \(T\) in the contraction
+ball gives analytic disks of the form
+\[
+  T(W)=T+D_LW(I+T^*D_LW)^{-1}D_R
+\]
+for sufficiently small strict contractions \(W:\operatorname{Ran}D_R\to
+\operatorname{Ran}D_L\), with first derivative \(D_LWD_R\) at \(W=0\).
+If \(\operatorname{rank}D_L\,\operatorname{rank}D_R\ge2\), the parameter space
+for \(W\) has complex dimension at least two.  The trace constraint
+\[
+  \operatorname{tr}T(W)=0
+\]
+is one holomorphic scalar equation whose derivative at the origin is the
+linear functional \(W\mapsto\operatorname{tr}(D_LWD_R)\).  If this functional
+is non-zero, the implicit function theorem leaves a non-constant trace-zero
+analytic disk through \(T\); if it is zero, any non-zero small one-parameter
+direction in the kernel already gives such a disk to first order and the same
+implicit-function argument applies after choosing a transverse parameter.
+This contradicts complex extremality.  Hence
+\[
+  \operatorname{rank}D_L\,\operatorname{rank}D_R=1.
+\]
+For a square contraction the two defect ranks are equal, so a non-unitary
+complex extreme point has defect indices \((1,1)\).
+
+If a unitary summand is present, the model lies on a boundary stratum already
+included in Proposition~\ref{prop:reduced-boundary-certificates} and the
+confluent-layer analysis.  Otherwise the contraction is completely
+non-unitary.  The Sz.-Nagy--Foias model theorem for finite-dimensional
+completely non-unitary contractions with defect indices \((1,1)\) identifies
+it unitarily with the compressed shift \(S_B\) for a finite Blaschke product
+of degree four.  Since the diagonal of the Takenaka--Malmquist model is the
+zero set \(\lambda_1,\ldots,\lambda_4\) of \(B\), the trace-zero condition is
+\[
+  \operatorname{tr}S_B=\lambda_1+\cdots+\lambda_4=0.
+\]
+\end{proof}
+
 \noindent\textbf{Non-normal case.}
-We now pass from normal contractions to arbitrary traceless contractions.  The
-argument uses the complex extreme boundary of the trace-zero contraction ball.
-For fixed trace-zero direction, the map
-\(H\mapsto A(H)=c_1H+c_2H^2+c_3H^3\) is holomorphic and
-\(\|A(H)\|_*\) is plurisubharmonic, since
-\[
-  \|A(H)\|_*=\sup_{\|Y\|\le1}|\operatorname{tr}(Y^*A(H))|.
-\]
-Hence its maximum on the compact trace-zero contraction ball is attained on
-the complex extreme boundary.
-
-Let \(T\) be such a complex extreme contraction in Schur form.  If
-\(D_L=(I-TT^*)^{1/2}\) and \(D_R=(I-T^*T)^{1/2}\), then every sufficiently
-small perturbation of the form \(D_LZD_R\) keeps \(T\) inside the contraction
-ball to first order, and the standard Julia-operator parametrisation makes this
-an actual analytic disk.  The trace-zero slice removes only the single complex
-linear condition
-\[
-  \operatorname{tr}(D_LZD_R)=0.
-\]
-Therefore, if \(\operatorname{rank}D_L\operatorname{rank}D_R\ge2\), there is a
-non-zero trace-zero analytic disk through \(T\), contradicting complex
-extremality.  Since \(T\) is square, \(\operatorname{rank}D_L=\operatorname{rank}D_R\).
-Thus a non-unitary complex extreme point has defect rank one:
-\[
-  \operatorname{rank}(I-T^*T)=\operatorname{rank}(I-TT^*)=1.
-\]
-The unitary extreme points are normal and have already been covered by the
-all-boundary normal estimate.
-
-A finite-dimensional completely non-unitary contraction with defect indices
-\((1,1)\) is unitarily equivalent to the compressed shift \(S_B\) associated
-with a finite Blaschke product
+By Proposition~\ref{prop:trace-zero-extreme-reduction}, the genuinely
+non-normal part of the \(4\times4\) trace-zero problem reduces to the
+rank-one defect compressed-shift model.  A finite-dimensional completely
+non-unitary contraction with defect indices \((1,1)\) is unitarily equivalent
+to the compressed shift \(S_B\) associated with a finite Blaschke product
 \[
   B(z)=\prod_{j=1}^4\frac{z-\lambda_j}{1-\overline{\lambda_j}z}.
 \]
@@ -799,6 +840,46 @@ If \(\sum_j\lambda_j=0\), then the Pick matrix
  records the finite certificate route and the local hard-corner closure, but
  the global chamber tables are not printed in this article.
 \end{remark}
+
+\begin{proposition}[Pick bound implies the quartic \(3072\) bound]
+\label{prop:pick-to-3072}
+Let \(B\) be a degree-four finite Blaschke product with centred zeros
+\(\lambda_1,\ldots,\lambda_4\), let \(S_B\) be the corresponding compressed
+shift, and let
+\[
+  A_B=\phi_\lambda(S_B)=c_1S_B+c_2S_B^2+c_3S_B^3 .
+\]
+If the Pick matrix \(\Pi_\lambda\) in
+\eqref{eq:quartic-pick-matrix} is positive semidefinite for the data
+\[
+  w_j=q_\lambda(\lambda_j)=\phi_\lambda(\lambda_j)/768,
+\]
+then
+\[
+  \|A_B\|_2\le768,\qquad \|A_B\|_*\le3072.
+\]
+\end{proposition}
+
+\begin{proof}
+Positive semidefiniteness of \(\Pi_\lambda\) is exactly the finite
+Nevanlinna--Pick condition, so there exists a Schur function
+\(f\in H^\infty(\bbD)\), \(\|f\|_\infty\le1\), with
+\[
+  f(\lambda_j)=\phi_\lambda(\lambda_j)/768,\qquad j=1,\ldots,4.
+\]
+The minimal function of \(S_B\) is \(B\).  Hence two functions with the same
+values at the zeros of \(B\), counted with multiplicity in the confluent case,
+give the same element of \(H^\infty/BH^\infty\) and therefore the same
+functional calculus value on \(S_B\).  Thus
+\[
+  f(S_B)=\phi_\lambda(S_B)/768=A_B/768.
+\]
+The \(H^\infty\) functional calculus for the model contraction gives
+\(\|f(S_B)\|_2\le\|f\|_\infty\le1\), hence \(\|A_B\|_2\le768\).  Finally
+\[
+  \|A_B\|_*\le \operatorname{rank}(A_B)\|A_B\|_2\le4\cdot768=3072.
+\]
+\end{proof}
 
 \begin{lemma}[Reduced Pick recursion]\label{lem:reduced-pick-recursion}
 By the finite Nevanlinna--Pick theorem, \(\Pi_\lambda\succeq0\) is equivalent
@@ -1005,12 +1086,25 @@ Appendix~\ref{app:pair-defect-blaschke} give
 \]
 and
 \[
-  |r(-r)|\le1 .
+  |r(-r)|<1 .
 \]
+The strict interior inequality is the one-point certificate displayed in
+Appendix~\ref{app:pair-defect-blaschke}: after writing the \(3{+}1\) polynomial
+as
+\[
+  P(z)=(z+r)(z^3-rz^2+ur z-u),\qquad u=e^{i\chi},
+\]
+one has
+\[
+  1-|r(-r)|^2=M(r,\cos\chi)/36864,
+\]
+and the Bernstein coefficients of \(M(r,2y-1)\) are non-negative with common
+zero only at the square endpoint \((r,y)=(1,1)\).  Hence
+\(|r(-r)|<1\) for \(0\le r<1\).
 For \(r<1\), the interior block consists only of the node \(-r\), and its Pick
 matrix is the scalar
 \[
-  \frac{1-|r(-r)|^2}{1-r^2}\ge0 .
+  \frac{1-|r(-r)|^2}{1-r^2}>0 .
 \]
 For the actual radial interior approximants
 \[
@@ -1030,10 +1124,10 @@ satisfy
   \frac{1-|r_t(t\xi_j)|^2}{1-t^2}\to+\infty,
 \]
 while all off-diagonal entries involving distinct unit nodes remain bounded.
-The Schur complement with respect to this \(3\times3\) block tends to the
-interior scalar \((1-|r(-r)|^2)/(1-r^2)\ge0\).  Hence the approximating Pick
-matrices are positive semidefinite for \(t\) close to \(1\), and the boundary
-certificate follows by continuity.  The only point where a boundary first
+By Lemma~\ref{lem:radial-boundary-blowup}, applied with this positive
+one-point interior block, the approximating Pick matrices are positive
+semidefinite for \(t\) close to \(1\), and the boundary certificate follows by
+continuity.  The only point where a boundary first
 pivot can vanish is the square spectrum; that endpoint is already covered by
 the all-circle/paired certificate in
 Proposition~\ref{prop:reduced-boundary-certificates}.
@@ -1290,6 +1384,32 @@ boxes.  The regular boxes and boundary/confluent reductions are covered by the
 certificates listed in the supplementary manifest
 \[
   \texttt{mathZ/reduced-pick-gamma3-certificate/MANIFEST.md}.
+\]
+The coverage table is:
+\[
+\begin{array}{c|c|c|c}
+\text{chart/stratum} & \text{pivots} & \text{method} & \text{equality faces}\\ \hline
+K\text{-region/compact core} & \gamma_1,\gamma_2,\gamma_3
+  & \text{finite Bernstein/Schur tables} & \text{none in the open cell}\\
+\text{paired family} & \gamma_1,\gamma_2,\gamma_3
+  & \text{symbolic factor/Sturm} & \text{radial square}\\
+\text{boundary and confluent layers} & \text{all active pivots}
+  & \text{boundary induction and confluent factors} & \text{lower strata}\\
+\text{real boundary face} & \text{pair inequalities}
+  & \text{CRT rational Bernstein} & \text{boundary faces}\\
+3{+}1\text{ boundary layer} & \gamma_1,\gamma_2,\gamma_3
+  & \text{Sturm/Bernstein plus blow-up} & \text{square/confluent}\\
+\text{radial square} & \text{determinant ratio}
+  & \text{explicit factorisation} & \rho=1\\
+\text{one-dimensional family} & \text{reduced pivots}
+  & \text{explicit positive factorisation} & \text{endpoints}\\
+\gamma_3\text{ hard corner} & \gamma_3
+  & \text{ridge blow-up and exact Bernstein} & \text{resolved faces}
+\end{array}
+\]
+The hard-corner verifier hash is
+\[
+  \texttt{473ac0d3875c1c3989ff42f1291b8db4ee104b3e4769283fdc1c754a5568dabc}.
 \]
 The only box on which the direct Bernstein expansion produces false negative
 coefficients is the third Schur-pivot hard corner in the two-parameter
@@ -1790,8 +1910,22 @@ places every eigenvalue of \(H(x)+E\) inside the union of disks of radius
 \(K_G(H)\norm{E}_2\) centred at the eigenvalues of \(H(x)\).  Along the
 straight-line homotopy \(E=t(\wt H(x)-H(x))\), this radius is strictly less
 than \(\delta_G(H)/2\).  The disks around distinct eigenvalues of \(H(x)\)
-are therefore disjoint, so no collision can occur.  Homotopy invariance in
-configuration space gives the braid statement.
+are therefore disjoint.
+
+Let \(\Gamma_j\) be the boundary circle of the disk around the \(j\)-th
+eigenvalue of \(H(x)\).  The Bauer--Fike estimate keeps the spectrum of
+\[
+  H(x)+t(\wt H(x)-H(x)),\qquad 0\le t\le1,
+\]
+away from every \(\Gamma_j\).  Therefore the Riesz projection
+\[
+  \frac{1}{2\pi i}\int_{\Gamma_j}
+  \bigl(zI-H(x)-t(\wt H(x)-H(x))\bigr)^{-1}\,dz
+\]
+has constant rank along the homotopy.  At \(t=0\) this rank is \(1\), so each
+disk contains exactly one eigenvalue, counted with algebraic multiplicity, for
+all \(t\).  Thus no collision can occur.  Homotopy invariance in configuration
+space gives the braid statement.
 \end{proof}
 
 \begin{proposition}[Sampled adaptive gap correction]\label{prop:sampled-gap}
@@ -1822,9 +1956,11 @@ since \(\delta_G(H)\ge0\).  Assume therefore that
 \(\widehat\delta_G-2KL_Gh_G>0\).  Then the disks of radius \(KL_Gh_G\)
 centred at the distinct eigenvalues of \(H(y)\) are disjoint, because their
 centres are separated by at least \(\widehat\delta_G\).  Bauer--Fike places
-every eigenvalue of \(H(x)\) in the union of these disks.  Since there are
-exactly \(n\) eigenvalues counted with multiplicity and the disks are
-disjoint, each disk contains exactly one eigenvalue of \(H(x)\).  This gives
+every eigenvalue of \(H(x)\) in the union of these disks.  As in
+Proposition~\ref{prop:BF-graph}, the Riesz projections over the disk
+boundaries have constant rank along the segment from \(H(y)\) to \(H(x)\).
+Each disk therefore contains exactly one eigenvalue of \(H(x)\), counted with
+algebraic multiplicity.  This gives
 a bijective matching between the spectra of \(H(y)\) and \(H(x)\), and each
 matched pair is within \(KL_Gh_G\).  Hence every pairwise gap decreases by
 at most \(2KL_Gh_G\).  Taking the minimum over sampled points and graph
@@ -1961,8 +2097,11 @@ toward \(-1\), and the largest branch increases toward the simple root
 \(P_2(E)=(E-2)(E+1)^2\), so the colliding pair, measured from the basepoint
 ordering \(-\sqrt3<0<\sqrt3\), occupies positions \(1\) and \(2\).
 With Convention~\ref{conv:upper-half-plane}, \(s^{1/2}\) gains a factor
-\(-1\) after one positive circuit and the local pair makes the positive
-half-twist of positions \(1\) and \(2\).  This is \(\sigma_1\):
+\(-1\) after one positive circuit.  The extra factor \(-1\) in
+\(u^2\sim -s/3\) only changes the initial phase of the local square-root
+coordinate, not the orientation of the exchange under a positive circuit in
+the chosen convention.  Thus the local pair makes the positive half-twist of
+positions \(1\) and \(2\).  This is \(\sigma_1\):
 \[
 \begin{array}{c|c|c}
 \text{puncture} & \text{colliding roots at the basepoint} & \text{braid}\\
@@ -2757,7 +2896,6 @@ $\cG_{\tr=0,3}(R_*)=162R_*^5$.
 \end{proposition}
 
 \begin{remark}[A non-generic torus scalar example]\label{rem:T2-degenerate-three-zero}
-\label{prop:T2-two-punctures}
 Keep $H=gM$ with
 \[
   g(k_1,k_2)=e^{\ii k_1}+0.3e^{-\ii k_1}+0.5e^{\ii k_2}-0.8.
