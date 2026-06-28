@@ -38,6 +38,8 @@ def bernstein_2d_terms(terms, box1, box2):
     # Transform to the unit square: x=x0+hx*X, y=y0+hy*Y.
     trans = {}
     for a, b, c in terms:
+        if sp.Integer(c) != c:
+            raise ValueError(f"non-integer coefficient at {(a, b)}: {c}")
         cint = int(c)
         for i in range(a + 1):
             cx = comb(a, i) * x0 ** (a - i) * hx**i

@@ -80,10 +80,11 @@ discriminant is $8R$ on the $2\times2$ ball and $162R^5$ on the traceless
 $3\times3$ ball of radius $R$; both are attained by unit-root diagonal
 families.  A roots-of-unity identity shows that the pattern
 $n^{n+1}(n-1)R^{n(n-1)-1}$, proved here for \(n\in\{2,3\}\), is the natural
-candidate for all \(n\).  For \(n=4\) we prove the sharp constant
-\(3072R^{11}\): the non-normal rank-one defect case is closed by a finite
-four-point Blaschke--Pick certificate and a blow-up resolution of its only
-hard Bernstein corner.
+candidate for all \(n\).  For \(n=4\) we prove the sharp lower bound
+\(3072R^{11}\), an unconditional matrix-gradient upper bound, and a reduced
+four-point Blaschke--Pick criterion for the sharp upper bound.  We also give
+a reproducible local certificate for the only hard corner encountered in the
+third Schur-pivot chart.
 
 Three families illustrate the certificate with complete braid computations.
 For the companion cubic $E^3-3E-k$, the two-puncture monodromy representation
@@ -144,9 +145,9 @@ observed margin is reduced by the explicit correction \(\cG(R_*)L_Gh_G\).
 Section~\ref{sec:config} fixes the configuration-space conventions.
 Section~\ref{sec:tr0constant} proves the quantitative input used later: for
 trace-zero cubic matrices \(\cG_{\tr=0,3}(R)=162R^5\), while for trace-zero
-quartic matrices it proves the sharp constant \(3072R^{11}\).  The non-normal
-quartic upper bound is reduced to, and closed by, the four-point
-Nevanlinna--Pick certificate.  The graph,
+quartic matrices it proves the sharp lower bound \(3072R^{11}\), an
+unconditional matrix-gradient upper bound, and a reduced four-point
+Nevanlinna--Pick criterion for the sharp upper bound.  The graph,
 sampling, and adaptive gap certificates occupy
 Sections~\ref{sec:graph}--\ref{sec:adaptive}.  The examples separate two
 cubic arrangements with the same local degree-three flavour but different
@@ -333,8 +334,24 @@ $J_2=\diag(1,-1)$.  The coefficient-route value $16R$ exceeds it by a factor of~
 
 \begin{proof}
 Write $B=H-\frac12(\tr H)I$; then $\Disc(H)=2\tr(B^2)$ and
-$\nabla_H\Disc=4B^T$.  Von Neumann gives
-$|D\Disc(H)[\delta H]|\le4\|B\|_*\|\delta H\|_2\le8\|H\|_2\|\delta H\|_2\le8R\|\delta H\|_2$.
+$\nabla_H\Disc=4B^T$.  By trace duality,
+\[
+  |D\Disc(H)[\delta H]|
+  \le 4\|B\|_*\|\delta H\|_2 .
+\]
+The trace-zero part \(B\) is the Frobenius-orthogonal projection of \(H\),
+so \(\|B\|_{\mathrm F}\le\|H\|_{\mathrm F}\).  Since \(B\) is \(2\times2\),
+Schatten Cauchy--Schwarz gives
+\[
+  \|B\|_*\le\sqrt2\,\|B\|_{\mathrm F}
+  \le \sqrt2\,\|H\|_{\mathrm F}
+  \le 2\|H\|_2 .
+\]
+Hence
+\[
+  |D\Disc(H)[\delta H]|
+  \le8\|H\|_2\|\delta H\|_2\le8R\|\delta H\|_2 .
+\]
 The lower bound $G_2(R)\ge8R$ follows from the radial family $tJ_2$ via homogeneity.
 \end{proof}
 
@@ -344,7 +361,13 @@ Then $\tr J_n=0$, $\|J_n\|_2=1$, $|\Disc(J_n)|=n^n$, and
 \[
   \sum_{j=1}^{n-1}\frac{1}{1-\omega^j}=\frac{n-1}{2}.
 \]
-Consequently the lower bound $\cG_n^{\tr=0}(R)\ge n(n-1)|\Disc(J_n)|R^{n(n-1)-1}$ gives
+The sum is the logarithmic-derivative form of the roots-of-unity radial
+variation; equivalently, differentiating
+\(\Disc(tJ_n)=t^{n(n-1)}\Disc(J_n)\) gives the lower bound
+\[
+  \cG_n^{\tr=0}(R)\ge n(n-1)|\Disc(J_n)|R^{n(n-1)-1}.
+\]
+Consequently
 \begin{equation}\label{eq:Gn-lower-unity}
   \cG_n^{\tr=0}(R)\;\ge\;n^{n+1}(n-1)\,R^{n(n-1)-1}.
 \end{equation}
@@ -391,16 +414,24 @@ $\cG_4^{\tr=0}(R)\ge4\cdot3\cdot256\cdot R^{11}=3072R^{11}$.
 quartic discriminant and using Cayley--Hamilton,
 \(\operatorname{adj}H=-H^3-a_2H-a_1I\), with \(\|H^k\|_*\le4R^k\), gives
 \(\|\nabla_H\Disc\|_*\le\tfrac{60416}{3}R^{11}\).
+The adjugate formula is consistent with the convention
+\(P_H(E)=E^4+a_2E^2+a_1E+a_0\): Cayley--Hamilton gives
+\[
+  H^4+a_2H^2+a_1H+a_0I=0,
+\]
+and therefore
+\[
+  H(-H^3-a_2H-a_1I)=a_0I=\det(H)I=H\,\operatorname{adj}H.
+\]
 
 \emph{Reduced sharp upper bound.}  By homogeneity it suffices to take \(R=1\).
 The normal strata are handled by \eqref{eq:F4-target} and the subsequent
 unit-circle and mixed-stratum reductions.  For non-normal matrices, Schur
 triangularisation and the finite Blaschke model reduce the problem to the
-rank-one defect model \(S_B\).  By
-Proposition~\ref{prop:interior-machine-certificate}, the reduced Pick matrix
-is positive semidefinite on the centered four-point disk.  Identity
-\eqref{eq:reduced-pick-recursion} therefore implies positivity of the original
-Pick matrix \eqref{eq:quartic-pick-matrix}.  The finite Nevanlinna--Pick theorem and
+rank-one defect model \(S_B\).  If the reduced Pick matrix is positive
+semidefinite on the centered four-point disk, identity
+\eqref{eq:reduced-pick-recursion} implies positivity of the original Pick
+matrix \eqref{eq:quartic-pick-matrix}.  The finite Nevanlinna--Pick theorem and
 Sarason's lifting theorem then give
 \(\|c_1S_B+c_2S_B^2+c_3S_B^3\|_2\le768\), hence
 \[
@@ -416,8 +447,10 @@ For every $n\ge2$ and $R>0$,
 \[
   \cG_n^{\tr=0}(R)=n^{n+1}(n-1)\,R^{n(n-1)-1},
 \]
-attained by \(tJ_n\).  The cases \(n=2,3,4\) are proved here; the formula
-remains conjectural for \(n\ge5\).
+attained by \(tJ_n\).  The cases \(n=2,3\) are proved here.  For \(n=4\) this
+formula is reduced to the four-point Pick positivity criterion of
+Theorem~\ref{thm:tr0-4x4}; the formula remains conjectural for \(n\ge4\)
+until the full finite certificate is supplied.
 \end{conjecture}
 
 \begin{remark}[Proof mechanism for Conjecture~\ref{conj:sharp} at $n=4$]
@@ -774,8 +807,9 @@ If \(\sum_j\lambda_j=0\), then the Pick matrix
   \right]_{i,j=1}^4
 \end{equation}
  is the finite positivity object whose semidefiniteness gives the non-normal
- quartic sharp upper bound; this semidefiniteness is proved in
- Proposition~\ref{prop:interior-machine-certificate}.
+ quartic sharp upper bound.  Proposition~\ref{prop:interior-machine-certificate}
+ records the finite certificate route and the local hard-corner closure, but
+ the global chamber tables are not printed in this article.
 \end{remark}
 
 \begin{lemma}[Reduced Pick recursion]\label{lem:reduced-pick-recursion}
@@ -947,7 +981,7 @@ and assume that the interior Pick matrix
   \frac{1-v_a\overline{v_b}}{1-\zeta_a\overline{\zeta_b}}
   \right]_{a,b=1}^\ell
 \]
-is positive semidefinite.  Then the Pick matrices for the radially perturbed
+is positive definite.  Then the Pick matrices for the radially perturbed
 nodes \(t\xi_i\), \(0<t<1\), together with the fixed interior nodes, are
 positive semidefinite for all \(t\) sufficiently close to \(1\).
 \end{lemma}
@@ -961,10 +995,8 @@ entries
 and bounded off-diagonal entries because the \(\xi_i\)'s are distinct.  Hence
 this block is positive definite and its inverse tends to zero as
 \(t\uparrow1\).  The Schur complement with respect to this block is the
-interior Pick matrix plus an \(o(1)\) perturbation.  If the interior matrix is
-positive definite, positivity follows for \(t\) close to \(1\).  The
-semidefinite case follows by replacing the interior block by its
-\(\varepsilon I\) regularisation and letting \(\varepsilon\downarrow0\).
+interior Pick matrix plus an \(o(1)\) perturbation.  Since the interior matrix
+is positive definite, positivity follows for \(t\) close to \(1\).
 \end{proof}
 
 \begin{proposition}[Full reduced Pick certificate on the two-angle \(3{+}1\) stratum]
@@ -1251,11 +1283,17 @@ remaining compact chambers is equivalent to the desired global reduced Pick
 positivity.
 \end{proof}
 
-\begin{proposition}[Analytic certificate for the interior reduced Pick criterion]
+\begin{proposition}[Finite certificate route and the \(\gamma_3\) hard corner]
 \label{prop:interior-machine-certificate}
-The reduced Pick matrix \(\Pi^{\mathrm{red}}_\lambda\) is positive semidefinite
-for every centred, non-confluent quadruple
-\(\lambda_1,\lambda_2,\lambda_3,\lambda_4\in\overline{\mathbb{D}}\).
+The global reduced Pick positivity problem for centred non-confluent
+quadruples is reduced to a finite list of rational Bernstein certificates.
+Among the two-parameter \(3{+}1\) Schur-pivot certificates, the only direct
+Bernstein hard corner is the \(\gamma_3\) corner
+\[
+  \rho\in[3/4,1],\qquad y\in[3/4,1],
+\]
+near \((\rho,y)=(1,1)\).  That local hard corner is closed by the blow-up
+certificate in Appendix~\ref{app:gamma-three-hard-corner}.
 \end{proposition}
 
 \begin{proof}
@@ -1266,14 +1304,13 @@ Lemma~\ref{lem:radial-boundary-blowup}, reduce the claim to interior
 non-confluent quadruples with $\max_j|\lambda_j|<1$.
 By Proposition~\ref{prop:finite-interior-reduction}, the remaining verification
 is a finite list of real polynomial non-negativity statements on rational
-boxes.  All non-corner boxes are certified by the Bernstein tables described
-in Appendix~\ref{app:pick-certificate}.  The only box on which the direct
-Bernstein expansion has negative coefficients is the third Schur-pivot
-hard corner in the two-parameter \(3{+}1\) chart,
+boxes.  The present paper prints the resolved certificate for the only hard
+corner found in the two-parameter \(3{+}1\) chart, namely the third Schur pivot
+near
 \[
   \rho\in[3/4,1],\qquad y\in[3/4,1],
 \]
-near the square endpoint \((\rho,y)=(1,1)\).
+at the square endpoint \((\rho,y)=(1,1)\).
 
 Appendix~\ref{app:gamma-three-hard-corner} resolves that corner by the
 blow-up
@@ -1296,17 +1333,12 @@ is positive in four regions: the inner tube \(|z|\le16v\), the annulus
 tail \(z\ge32\) after the reciprocal chart \(v=ru\).  The first and second
 regions are closed by explicit coefficient and remainder inequalities, and
 the latter two by exact rational Bernstein expansions with no negative
-coefficients.
-
-Consequently every Schur pivot polynomial in the finite interior reduction is
-non-negative, with zeros only on the already certified boundary or confluent
-faces.  On the non-confluent interior the pivots are strictly positive, hence
-the Schur recursion gives \(\Pi^{\mathrm{red}}_\lambda\succ0\).  Taking limits
-gives positive semidefiniteness on the closed non-confluent locus.
+coefficients.  This proves the local hard-corner certificate.  The global
+reduced Pick criterion is obtained once the remaining finite chamber tables
+from Proposition~\ref{prop:finite-interior-reduction} are supplied.
 \end{proof}
 
-Since the reduced Pick criterion \eqref{eq:reduced-pick-matrix} holds globally
-by Proposition~\ref{prop:interior-machine-certificate},
+If the reduced Pick criterion \eqref{eq:reduced-pick-matrix} holds globally,
 \[
   \|A_B\|_2
   =768\,\|q_\lambda(S_B)\|_2
@@ -1322,11 +1354,12 @@ The first reduced pivot is established on the full centred disk by
 Proposition~\ref{prop:first-reduced-pivot}, and the confluent rank-one defect
 layers are covered by Proposition~\ref{prop:confluent-layers}.  The radial
 square interior degeneration is isolated in
-Proposition~\ref{prop:radial-square-model}.  The final step---positive
-semidefiniteness of the reduced Pick matrix on the genuinely interior,
-non-confluent cells---is established by the finite Bernstein and blow-up
-certificate in
-Proposition~\ref{prop:interior-machine-certificate}.
+Proposition~\ref{prop:radial-square-model}.  The remaining genuinely interior,
+non-confluent cells form the finite Bernstein problem of
+Proposition~\ref{prop:finite-interior-reduction}.  Proposition~\ref{prop:interior-machine-certificate}
+closes the only hard \(\gamma_3\) corner of that finite problem, while the full
+non-normal \(n=4\) sharp upper bound remains conditional on the remaining
+finite chamber tables.
 \end{remark}
 
 \begin{remark}[Auxiliary coefficient region]
@@ -1922,9 +1955,9 @@ has non-commuting generator images.
 The discriminant computation shows that the only branch values are
 \(\pm2\).  Near \(k=2\), write \(E=-1+u\) and \(k=2+s\).  Since
 \[
-  (-1+u)^3-3(-1+u)-(2+s)=3u^2+u^3-s,
+  (-1+u)^3-3(-1+u)-(2+s)=-3u^2+u^3-s,
 \]
-the two local roots satisfy \(u=\pm(s/3)^{1/2}+O(s)\).  Along the real
+the two local roots satisfy \(u=\pm(-s/3)^{1/2}+O(s)\).  Along the real
 base arc from \(0\) to \(2-r\), the roots remain real and ordered.  The branch tracking is elementary: if
 \(P_k(E)=0\) and \(E\ne\pm1\), then
 \[
@@ -2734,13 +2767,13 @@ subgroup of $Z(B_3)$.  Theorem~\ref{thm:torus-full} applies with
 $\cG_{\tr=0,3}(R_*)=162R_*^5$.
 \end{proposition}
 
-\begin{proposition}[Punctured-torus monodromy, two exceptional points]
+\begin{remark}[A non-generic torus scalar example]\label{rem:T2-degenerate-three-zero}
 \label{prop:T2-two-punctures}
 Keep $H=gM$ with
 \[
   g(k_1,k_2)=e^{\ii k_1}+0.3e^{-\ii k_1}+0.5e^{\ii k_2}-0.8.
 \]
-The equation $g=0$ on $\bbT^2$ has exactly two transverse zeros, located at
+The equation $g=0$ on $\bbT^2$ has two transverse zeros, located at
 \begin{align*}
   p_1 &= \bigl(\arccos\tfrac{11}{15},\;\pi+\arccos\tfrac{23}{75}\bigr)
         \approx(0.7476,\,4.4007),\\
@@ -2751,16 +2784,15 @@ with Jacobians
 \[
   J(p_1)=-\tfrac{8\sqrt{26}}{375}<0,\qquad J(p_2)=+\tfrac{8\sqrt{26}}{375}>0.
 \]
-The fundamental group $\pi_1(\bbT^2\setminus\{p_1,p_2\})\cong F_3$ has
-presentation $\langle a,b,\mu_1,\mu_2\mid[a,b]\mu_1\mu_2=1\rangle$.
-Setting $\Omega=(\sigma_1\sigma_2)^3$, the braid monodromy representation
-$\beta:\pi_1(\bbT^2\setminus\{p_1,p_2\})\to B_3$ is
+It also has a third, non-transverse zero at
 \[
-  \beta(a)=\Omega,\quad\beta(b)=1,\quad
-  \beta(\mu_1)=\Omega^{-1},\quad\beta(\mu_2)=\Omega.
+  p_0=(0,\pi).
 \]
-The image is $\langle\Omega\rangle\cong\bbZ\subset Z(B_3)$.
-\end{proposition}
+Thus the correct discriminant complement is
+\(\bbT^2\setminus\{p_0,p_1,p_2\}\), not a two-puncture torus.  This example is
+therefore recorded only as a diagnostic non-generic scalar family; it is not
+used as a two-puncture monodromy computation.
+\end{remark}
 
 \begin{proof}
 Write $c=\cos k_1$, $s=\sin k_1$, $C=\cos k_2$, $S=\sin k_2$.  The
@@ -2781,12 +2813,12 @@ The Jacobian of the real map $(k_1,k_2)\mapsto(\operatorname{Re}g,\operatorname{
   J(k_1,k_2)=-0.65\sin k_1\cos k_2+0.35\sin k_2\cos k_1.
 \]
 At $(0,\pi)$: $J=0$.  A local expansion gives
-$g(\epsilon,\pi+\delta)\approx(-0.65\epsilon^2+0.25\delta^2)+i(0.7\epsilon+0.5\delta)$,
+$g(\epsilon,\pi+\delta)\approx(-0.65\epsilon^2+0.25\delta^2)+i(0.7\epsilon-0.5\delta)$,
 so on the circle $(\epsilon,\delta)=r(\cos\theta,\sin\theta)$ the
 image of $g$ stays near the imaginary axis to leading order and does not
 wind around the origin; the local degree of $g$ at $(0,\pi)$ is zero.
-This zero therefore carries no braid monodromy and is excluded from the
-exceptional-point count.
+This zero may carry trivial local winding, but it is still part of the
+discriminant locus and cannot be deleted from the domain.
 
 \emph{Case $c=11/15$}.  Then $s=\pm2\sqrt{26}/15$,
 $C=-23/75$, $S=\mp14\sqrt{26}/75$.  (One checks $C^2+S^2=(529+196\cdot26)/75^2=1$.)
@@ -2801,28 +2833,7 @@ as stated.  The Jacobian formula gives
 \end{align*}
 confirming $\sgn J(p_1)=-1$ and $\sgn J(p_2)=+1$.
 
-\emph{Braid monodromy}.
-Since $H=gM$ and the eigenvalues of $M=\diag(1,\omega,\omega^2)$ are
-distinct and fixed, all three eigenvalues of $H$ rotate rigidly by $g$.
-By the same winding-number argument as in
-Proposition~\ref{prop:T2-no-puncture}, the torus generators give
-$\beta(a)=\Omega$ and $\beta(b)=1$.
-For the meridian $\mu_j$ around $p_j$, the local degree of $g$ at $p_j$
-equals $\sgn J(p_j)$; a winding-number-$w$ loop of $g$ produces
-braid $\Omega^w\in Z(B_3)$.  Hence $\beta(\mu_1)=\Omega^{-1}$ and
-$\beta(\mu_2)=\Omega$.
-
-The Zariski--van Kampen relation $\beta([a,b])\beta(\mu_1)\beta(\mu_2)=1$
-reduces to $[\Omega,1]\cdot\Omega^{-1}\cdot\Omega=1$, which holds since
-$\Omega\in Z(B_3)$.  This is consistent: the abelian image forces all
-ZvK relations to be automatic, reflecting that the representation factors
-through $\pi_1^{\rm ab}\cong H_1(\bbT^2\setminus\{p_1,p_2\})$.
-
-\emph{Contrast with the companion cubic}
-(Section~\ref{sec:nonabelian-cubic}): for $E^3-3E-k$, the meridians map to
-$\sigma_1,\sigma_2\notin Z(B_3)$ and the image is all of $B_3$.
-Here every generator maps into the centre because the $H=gM$ structure
-propagates the winding of the scalar factor $g$ to all strands simultaneously.
+This completes the stated diagnostic calculation.
 \end{proof}
 
 \appendix
@@ -2991,14 +3002,14 @@ hard Bernstein corner by a blow-up.
 \end{remark}
 
 \begin{remark}[Why this is not an infinite regress]\label{rem:not-infinite-regress}
-The reduction stops at this point.  No new analytic or functional-analytic
-statement remains after Proposition~\ref{prop:finite-interior-reduction}: the
-objects to be checked are explicitly generated polynomials with rational
-coefficients on rational boxes.  The required certificates are supplied here:
-the regular boxes are covered by the Schur-pivot Bernstein tables, and the
-unique hard corner is covered by the blow-up certificate in
-Appendix~\ref{app:gamma-three-hard-corner}.  Therefore the non-normal quartic
-case is closed, rather than merely reduced to a further condition.
+The reduction stops at a finite exact-arithmetic problem.  No new analytic or
+functional-analytic statement remains after
+Proposition~\ref{prop:finite-interior-reduction}: the objects to be checked are
+explicitly generated polynomials with rational coefficients on rational boxes.
+This article supplies the resolved certificate for the unique hard corner,
+Appendix~\ref{app:gamma-three-hard-corner}; the remaining regular chamber
+tables are finite supplementary data required for an unconditional non-normal
+quartic sharp upper bound.
 \end{remark}
 
 \begin{lemma}[Bernstein certificate implication]\label{lem:bernstein-certificate-implication}
@@ -3391,10 +3402,12 @@ For auditability, the exact script and output used to regenerate the numerical
 statements above are
 \[
 \begin{gathered}
-\texttt{/Users/ray/Downloads/MathZ\_gamma3\_hard\_corner\_certificate.py},\\
-\texttt{/Users/ray/Downloads/MathZ\_gamma3\_hard\_corner\_certificate\_output.md}.
+\texttt{mathZ/reduced-pick-gamma3-certificate/reproduce\_gamma3\_hard\_corner.py},\\
+\texttt{mathZ/reduced-pick-gamma3-certificate/outputs/REFERENCE\_OUTPUT.md}.
 \end{gathered}
 \]
+The accompanying input polynomial caches are included in the same repository
+directory, and the script uses relative paths only.
 
 
 %% ===================================================================
@@ -3467,9 +3480,23 @@ identity
   |1-ab|^2=(1-r\rho\cos(\alpha+\beta))^2+(r\rho)^2\sin^2(\alpha+\beta)
            =1-2r\rho\cos(\alpha+\beta)+(r\rho)^2.
 \]
-From $re^{i\alpha}+\rho e^{i\beta}=-1$ we get
-$r^2+\rho^2+2r\rho\cos(\alpha-\beta)=1$, so $r\rho|\cos(\alpha-\beta)|\le\tfrac12$.
-Combining these constraints gives $|1-ab|\le 1-r^2\rho^2=(1-r\rho)(1+r\rho)$.
+From \(a+b=-1\) one obtains the exact identity
+\[
+\begin{aligned}
+  (1-r^2\rho^2)^2-|1-ab|^2
+  &=(1-|a|^2|b|^2)^2-|1-ab|^2  \\
+  &=(1-r^2)(1-\rho^2)(r^2+\rho^2+r^2\rho^2).
+\end{aligned}
+\]
+Indeed, expand the left hand side and use
+\[
+  |a+b|^2=r^2+\rho^2+2r\rho\cos(\alpha-\beta)=1
+\]
+to eliminate \(\cos(\alpha-\beta)\).  Since \(0\le r,\rho\le1\), the right
+hand side is non-negative.  Therefore
+\[
+  |1-ab|\le 1-r^2\rho^2=(1-r\rho)(1+r\rho).
+\]
 Since $r\rho=|s|$, this reads
 \[
   |1-s|\le1-|s|^2.
@@ -3607,7 +3634,7 @@ The upper and lower bounds coincide, proving Theorem~\ref{thm:tr0-exact}.
 No datasets were generated or analysed during the current study.
 
 \section*{Statements and declarations}
-The author(s) declare no competing interests.  No external funding was used
+The author declares no competing interests.  No external funding was used
 for this work.
 
 %% ===================================================================
