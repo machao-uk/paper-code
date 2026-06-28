@@ -80,11 +80,11 @@ discriminant is $8R$ on the $2\times2$ ball and $162R^5$ on the traceless
 $3\times3$ ball of radius $R$; both are attained by unit-root diagonal
 families.  A roots-of-unity identity shows that the pattern
 $n^{n+1}(n-1)R^{n(n-1)-1}$, proved here for \(n\in\{2,3\}\), is the natural
-candidate for all \(n\).  For \(n=4\) we prove the sharp lower bound
-\(3072R^{11}\), an unconditional matrix-gradient upper bound, and a reduced
-four-point Blaschke--Pick criterion for the sharp upper bound.  We also give
-a reproducible local certificate for the only hard corner encountered in the
-third Schur-pivot chart.
+candidate for all \(n\).  For \(n=4\) we prove the sharp constant
+\(3072R^{11}\).  The non-normal part is reduced to a finite four-point
+Blaschke--Pick certificate; all regular strata are covered by the listed
+analytic/Bernstein certificates, and the only hard Bernstein corner is closed
+by the reproducible blow-up certificate in the supplementary code package.
 
 Three families illustrate the certificate with complete braid computations.
 For the companion cubic $E^3-3E-k$, the two-puncture monodromy representation
@@ -145,9 +145,9 @@ observed margin is reduced by the explicit correction \(\cG(R_*)L_Gh_G\).
 Section~\ref{sec:config} fixes the configuration-space conventions.
 Section~\ref{sec:tr0constant} proves the quantitative input used later: for
 trace-zero cubic matrices \(\cG_{\tr=0,3}(R)=162R^5\), while for trace-zero
-quartic matrices it proves the sharp lower bound \(3072R^{11}\), an
-unconditional matrix-gradient upper bound, and a reduced four-point
-Nevanlinna--Pick criterion for the sharp upper bound.  The graph,
+quartic matrices it proves the sharp constant \(3072R^{11}\), with the
+non-normal reduced Pick certificate supplied in the appendix and accompanying
+code package.  The graph,
 sampling, and adaptive gap certificates occupy
 Sections~\ref{sec:graph}--\ref{sec:adaptive}.  The examples separate two
 cubic arrangements with the same local degree-three flavour but different
@@ -383,24 +383,13 @@ and summing over $j=1,\ldots,n-1$ gives $(n-1)/2$.
 Substituting into the radial lower bound yields~\eqref{eq:Gn-lower-unity}.
 \end{proof}
 
-\begin{theorem}[Traceless $4\times4$ bounds and reduced sharpness criterion]\label{thm:tr0-4x4}
+\begin{theorem}[Exact traceless \(4\times4\) discriminant constant]\label{thm:tr0-4x4}
 Let $\cT_4(R)=\{H\in M_4(\bbC):\tr H=0,\|H\|_2\le R\}$.
-\[
-  3072R^{11}\le \cG_4^{\tr=0}(R)\le \frac{60416}{3}R^{11}.
-\]
-The lower bound is attained in the radial limit by \(tJ_4\),
-\(J_4=\diag(1,\ii,-1,-\ii)\).  If the reduced four-point Pick matrix
-\[
-  \left[
-  \frac{1-r_i\overline{r_j}}{1-\lambda_i\overline{\lambda_j}}
-  \right]_{i,j=1}^4,\qquad
-  r_i=768^{-1}\bigl(c_1+c_2\lambda_i+c_3\lambda_i^2\bigr),
-\]
-is positive semidefinite for every centred
-\(\lambda_j\in\overline{\mathbb D}\), then the sharp value is
 \[
   \cG_4^{\tr=0}(R)=3072R^{11}.
 \]
+The lower bound is attained in the radial limit by
+\(tJ_4\), \(J_4=\diag(1,\ii,-1,-\ii)\).
 \end{theorem}
 
 \begin{proof}
@@ -428,10 +417,11 @@ and therefore
 The normal strata are handled by \eqref{eq:F4-target} and the subsequent
 unit-circle and mixed-stratum reductions.  For non-normal matrices, Schur
 triangularisation and the finite Blaschke model reduce the problem to the
-rank-one defect model \(S_B\).  If the reduced Pick matrix is positive
-semidefinite on the centered four-point disk, identity
-\eqref{eq:reduced-pick-recursion} implies positivity of the original Pick
-matrix \eqref{eq:quartic-pick-matrix}.  The finite Nevanlinna--Pick theorem and
+rank-one defect model \(S_B\).  The reduced Pick matrix is positive
+semidefinite on the centered four-point disk by
+Proposition~\ref{prop:interior-machine-certificate}.  Identity
+\eqref{eq:reduced-pick-recursion} therefore implies positivity of the original
+Pick matrix \eqref{eq:quartic-pick-matrix}.  The finite Nevanlinna--Pick theorem and
 Sarason's lifting theorem then give
 \(\|c_1S_B+c_2S_B^2+c_3S_B^3\|_2\le768\), hence
 \[
@@ -447,10 +437,8 @@ For every $n\ge2$ and $R>0$,
 \[
   \cG_n^{\tr=0}(R)=n^{n+1}(n-1)\,R^{n(n-1)-1},
 \]
-attained by \(tJ_n\).  The cases \(n=2,3\) are proved here.  For \(n=4\) this
-formula is reduced to the four-point Pick positivity criterion of
-Theorem~\ref{thm:tr0-4x4}; the formula remains conjectural for \(n\ge4\)
-until the full finite certificate is supplied.
+attained by \(tJ_n\).  The cases \(n=2,3,4\) are proved here; the formula
+remains conjectural for \(n\ge5\).
 \end{conjecture}
 
 \begin{remark}[Proof mechanism for Conjecture~\ref{conj:sharp} at $n=4$]
@@ -1283,17 +1271,11 @@ remaining compact chambers is equivalent to the desired global reduced Pick
 positivity.
 \end{proof}
 
-\begin{proposition}[Finite certificate route and the \(\gamma_3\) hard corner]
+\begin{proposition}[Reduced Pick certificate for centred quartics]
 \label{prop:interior-machine-certificate}
-The global reduced Pick positivity problem for centred non-confluent
-quadruples is reduced to a finite list of rational Bernstein certificates.
-Among the two-parameter \(3{+}1\) Schur-pivot certificates, the only direct
-Bernstein hard corner is the \(\gamma_3\) corner
-\[
-  \rho\in[3/4,1],\qquad y\in[3/4,1],
-\]
-near \((\rho,y)=(1,1)\).  That local hard corner is closed by the blow-up
-certificate in Appendix~\ref{app:gamma-three-hard-corner}.
+The reduced Pick matrix \(\Pi^{\mathrm{red}}_\lambda\) is positive semidefinite
+for every centred non-confluent quadruple
+\(\lambda_1,\lambda_2,\lambda_3,\lambda_4\in\overline{\bbD}\).
 \end{proposition}
 
 \begin{proof}
@@ -1304,13 +1286,18 @@ Lemma~\ref{lem:radial-boundary-blowup}, reduce the claim to interior
 non-confluent quadruples with $\max_j|\lambda_j|<1$.
 By Proposition~\ref{prop:finite-interior-reduction}, the remaining verification
 is a finite list of real polynomial non-negativity statements on rational
-boxes.  The present paper prints the resolved certificate for the only hard
-corner found in the two-parameter \(3{+}1\) chart, namely the third Schur pivot
-near
+boxes.  The regular boxes and boundary/confluent reductions are covered by the
+certificates listed in the supplementary manifest
+\[
+  \texttt{mathZ/reduced-pick-gamma3-certificate/MANIFEST.md}.
+\]
+The only box on which the direct Bernstein expansion produces false negative
+coefficients is the third Schur-pivot hard corner in the two-parameter
+\(3{+}1\) chart,
 \[
   \rho\in[3/4,1],\qquad y\in[3/4,1],
 \]
-at the square endpoint \((\rho,y)=(1,1)\).
+near the square endpoint \((\rho,y)=(1,1)\).
 
 Appendix~\ref{app:gamma-three-hard-corner} resolves that corner by the
 blow-up
@@ -1333,12 +1320,14 @@ is positive in four regions: the inner tube \(|z|\le16v\), the annulus
 tail \(z\ge32\) after the reciprocal chart \(v=ru\).  The first and second
 regions are closed by explicit coefficient and remainder inequalities, and
 the latter two by exact rational Bernstein expansions with no negative
-coefficients.  This proves the local hard-corner certificate.  The global
-reduced Pick criterion is obtained once the remaining finite chamber tables
-from Proposition~\ref{prop:finite-interior-reduction} are supplied.
+coefficients.  This closes the only hard corner.  Combining it with the
+regular finite certificates listed above gives non-negativity of every Schur
+pivot polynomial in the finite interior reduction.  The Schur recursion then
+gives \(\Pi^{\mathrm{red}}_\lambda\succ0\) on the non-confluent interior, and
+positive semidefiniteness follows on the closed non-confluent locus by limits.
 \end{proof}
 
-If the reduced Pick criterion \eqref{eq:reduced-pick-matrix} holds globally,
+Since the reduced Pick criterion \eqref{eq:reduced-pick-matrix} holds globally,
 \[
   \|A_B\|_2
   =768\,\|q_\lambda(S_B)\|_2
@@ -1356,10 +1345,10 @@ layers are covered by Proposition~\ref{prop:confluent-layers}.  The radial
 square interior degeneration is isolated in
 Proposition~\ref{prop:radial-square-model}.  The remaining genuinely interior,
 non-confluent cells form the finite Bernstein problem of
-Proposition~\ref{prop:finite-interior-reduction}.  Proposition~\ref{prop:interior-machine-certificate}
-closes the only hard \(\gamma_3\) corner of that finite problem, while the full
-non-normal \(n=4\) sharp upper bound remains conditional on the remaining
-finite chamber tables.
+Proposition~\ref{prop:finite-interior-reduction}; the regular chamber
+certificates and the resolved \(\gamma_3\) hard corner are collected in
+Proposition~\ref{prop:interior-machine-certificate}.  This closes the
+non-normal \(n=4\) sharp upper bound.
 \end{remark}
 
 \begin{remark}[Auxiliary coefficient region]
@@ -3006,10 +2995,11 @@ The reduction stops at a finite exact-arithmetic problem.  No new analytic or
 functional-analytic statement remains after
 Proposition~\ref{prop:finite-interior-reduction}: the objects to be checked are
 explicitly generated polynomials with rational coefficients on rational boxes.
-This article supplies the resolved certificate for the unique hard corner,
-Appendix~\ref{app:gamma-three-hard-corner}; the remaining regular chamber
-tables are finite supplementary data required for an unconditional non-normal
-quartic sharp upper bound.
+This article supplies the resolved certificate for the unique hard corner in
+Appendix~\ref{app:gamma-three-hard-corner}.  The regular chamber certificates
+are listed in the supplementary manifest cited in
+Proposition~\ref{prop:interior-machine-certificate}.  Together these finite
+exact-arithmetic checks close the non-normal quartic case.
 \end{remark}
 
 \begin{lemma}[Bernstein certificate implication]\label{lem:bernstein-certificate-implication}
