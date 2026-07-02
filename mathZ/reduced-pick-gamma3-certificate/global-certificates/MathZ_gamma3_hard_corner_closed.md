@@ -8,20 +8,20 @@ The remaining gamma3 hard corner at
 (rho,y) = (1,1),    rho in [3/4,1], y in [3/4,1]
 ```
 
-is not a genuine counterexample or numerical obstruction.  After resolving the corner by the ridge blow-up, the primitive norm polynomial is positive in the hard corner by elementary leading-term estimates plus finite away-ridge Bernstein checks.
+is closed by the ridge blow-up.  In the resolved coordinates, the primitive norm polynomial is positive in the hard corner by elementary leading-term estimates plus finite away-ridge Bernstein checks.
 
 This file records the analytic certificate.
 
 The certificate is reproducible by running
 
 ```text
-python3 /Users/ray/Downloads/MathZ_gamma3_hard_corner_certificate.py
+python3 ../reproduce_gamma3_hard_corner.py
 ```
 
 The last verified output is
 
 ```text
-/Users/ray/Downloads/MathZ_gamma3_hard_corner_certificate_output.md
+../outputs/REFERENCE_OUTPUT.md
 ```
 
 ## Coordinates

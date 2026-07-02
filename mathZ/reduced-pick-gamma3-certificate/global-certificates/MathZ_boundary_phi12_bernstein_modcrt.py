@@ -207,7 +207,17 @@ def run_pair(pair):
             "zero": sum(1 for x in known if x == 0),
         })
     lines = [f"## pair `{pair}`", ""]
-    for s in summaries:
+    coarse = summaries[0]
+    lines.append(
+        "The unsubdivided triangle is included as a coarse reference.  The "
+        "certificate uses the four first-subdivision triangles below."
+    )
+    lines.append("")
+    lines.append(
+        f"- coarse triangle: reconstruction failures `{coarse['failures']}`, "
+        f"minimum coefficient `{coarse['min']}`"
+    )
+    for s in summaries[1:]:
         lines.append("")
         lines.append(f"## triangle `{s['tri_idx']}`")
         lines.append(f"- vertices: `{s['tri']}`")
@@ -228,7 +238,7 @@ def main():
         "",
         f"- primes: `{PRIMES}`",
         f"- Bernstein coefficient count per triangle: `{(DEG + 1) * (DEG + 2) // 2}`",
-        "- Certification criterion: the four depth-1 subtriangles all have nonnegative reconstructed Bernstein coefficients.",
+        "- Certification criterion: all four first-subdivision triangles have nonnegative reconstructed Bernstein coefficients.",
         "",
     ]
     all_ok = True
@@ -246,9 +256,7 @@ def main():
     else:
         lines.append("- At least one non-boundary pair failed the depth-1 Bernstein certificate.")
     out = "\n".join(lines)
-    Path("/Users/ray/Downloads/MathZ_boundary_phi12_bernstein_modcrt.md").write_text(out)
-    with open("/Users/ray/Downloads/MathZ_contraction_proof.md", "a") as f:
-        f.write("\n\n" + out + "\n")
+    Path(__file__).with_suffix(".md").write_text(out)
     print(out)
 
 

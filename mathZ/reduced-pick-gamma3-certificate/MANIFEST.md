@@ -41,32 +41,45 @@ Expected result: no diff, and the output contains
 hard corner closed: True
 ```
 
-## Global Certificate Files
+## Primary Proof Object Files
+
+```text
+CERTIFICATE_LEDGER.md
+global-certificates/MathZ_boundary_phi12_bernstein_modcrt.md
+global-certificates/MathZ_boundary_phi12_bernstein_modcrt.py
+global-certificates/MathZ_gamma3_hard_corner_closed.md
+outputs/REFERENCE_OUTPUT.md
+reproduce_gamma3_hard_corner.py
+```
+
+These files are the primary reproducible proof objects for the finite
+exact-arithmetic certificates cited in the paper.
+
+## Archival Logs
+
+The following files record exploratory calculations, failed approaches, and
+historical state snapshots.  They are retained for auditability but are not
+used as standalone proof certificates.
 
 ```text
 global-certificates/MathZ_COMPLETE_STATE_2026-06-28.md
 global-certificates/MathZ_n4_closure_summary.md
 global-certificates/MathZ_schur_step_certificates.md
-global-certificates/MathZ_boundary_phi12_bernstein_modcrt.md
-global-certificates/MathZ_boundary_phi12_bernstein_modcrt.py
 global-certificates/MathZ_contraction_proof.md
 global-certificates/MathZ_gamma2_strict.md
 global-certificates/MathZ_polytope_cert.md
-global-certificates/MathZ_gamma3_hard_corner_closed.md
 ```
-
-These files are not substitutes for the paper proof text; they are the
-audit trail for the finite exact-arithmetic certificates cited there.
 
 ## SHA256
 
 ```text
+7f0e2730350bfa2ec0ec2dfd5c09d52fb5f7b90d554e0a1a95670864e38c9a80  CERTIFICATE_LEDGER.md
 4a4a90d07746aa5a347a5ecc664a290c072be1a0bbc251f942ae20fe0839f11a  global-certificates/MathZ_COMPLETE_STATE_2026-06-28.md
 b4015dd6e1eae27d976776f9bd4691c2f1aa40f366b2856777454b4f1df23179  global-certificates/MathZ_boundary_phi12_bernstein_modcrt.md
-32013e3e042e8131334af6126cc9a9b5a84c60d9c6c8627d001a13611339977f  global-certificates/MathZ_boundary_phi12_bernstein_modcrt.py
+aa8140ec2ce7c305e0629f2a52a267cbcaf41e746e9af8b9ad1529352c1fff05  global-certificates/MathZ_boundary_phi12_bernstein_modcrt.py
 2e921c1afe81ecc4f04dc206bd7c2d3c0a312f5d7d1da80db20c4b7e5405207e  global-certificates/MathZ_contraction_proof.md
 9b1c6df79b0c2947fffaf18fd0f64daf5db09728c00ed72f705cf8630ce5f48a  global-certificates/MathZ_gamma2_strict.md
-8c6a1c566d59a867705c017179bc4a07d3e696e36a6001342d5fbe420440a3b0  global-certificates/MathZ_gamma3_hard_corner_closed.md
+a9a38ac97bf92dd240fc5d7a7c25a9ce950c525b4b74603663de4bde656615b6  global-certificates/MathZ_gamma3_hard_corner_closed.md
 9ffaa9ca7d32b30ea725e6edf0c5aba7501a3f4a711087b64c39a94fd4a61334  global-certificates/MathZ_n4_closure_summary.md
 0db263addf3ffa7058cf16b2e5c4bed9f7ed7347fc79be0d2b37b388ee832548  global-certificates/MathZ_polytope_cert.md
 a08b5007709799b23e5f9e3c61d12f51b380d6d86fed3c9387c0fbbd799835ba  global-certificates/MathZ_schur_step_certificates.md

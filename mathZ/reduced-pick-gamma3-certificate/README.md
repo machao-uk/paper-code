@@ -3,6 +3,9 @@
 This directory contains the reproducibility package for the quartic reduced
 Pick matrix hard-corner certificate used in `mathZ.tex`.
 
+Start with `CERTIFICATE_LEDGER.md`.  It lists the closed certificate blocks,
+the exact verifier outputs, and which archival logs support each block.
+
 ## What It Verifies
 
 The script verifies the only hard corner in the two-parameter `3+1` chart for
@@ -93,3 +96,13 @@ hard corner closed: True
 The run is exact rational arithmetic. On the original machine it takes roughly
 1-2 minutes.
 
+The real-boundary CRT certificate is reproduced by:
+
+```bash
+cd global-certificates
+python3 MathZ_boundary_phi12_bernstein_modcrt.py
+```
+
+Expected result: the depth-1 subtriangle certificates for pairs `(1,2)`,
+`(1,3)`, and `(2,3)` are all `True`, with zero rational reconstruction
+failures.

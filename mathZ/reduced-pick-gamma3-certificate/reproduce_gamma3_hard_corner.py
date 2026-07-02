@@ -1,5 +1,4 @@
 import pickle
-from fractions import Fraction
 from math import comb
 from pathlib import Path
 
@@ -22,40 +21,56 @@ V_ANN = sp.Rational(1, 64)
 Z_ANN = sp.Rational(1, 4)
 
 
-def bernstein_2d_terms(terms, box1, box2):
-    """Exact 2D tensor Bernstein sign check for sparse terms c*x^a*y^b."""
-    def frac(x):
-        x = sp.Rational(x)
-        return Fraction(int(x.p), int(x.q))
+def _lcm_many(values):
+    out = 1
+    for value in values:
+        out = out * value // sp.igcd(out, value)
+    return int(out)
 
+
+def bernstein_2d_terms(terms, box1, box2):
+    """Exact 2D tensor Bernstein sign check using integer-scaled coefficients.
+
+    All signs are taken after multiplication by positive common denominators.
+    No floating-point sign decision is used.
+    """
     deg1 = max(a for a, _, _ in terms)
     deg2 = max(b for _, b, _ in terms)
-    x0, x1 = map(frac, box1)
-    y0, y1 = map(frac, box2)
+    x0, x1 = map(sp.Rational, box1)
+    y0, y1 = map(sp.Rational, box2)
     hx = x1 - x0
     hy = y1 - y0
+    dx = int(sp.ilcm(int(x0.q), int(hx.q)))
+    dy = int(sp.ilcm(int(y0.q), int(hy.q)))
+    x0n = int(x0 * dx)
+    hxn = int(hx * dx)
+    y0n = int(y0 * dy)
+    hyn = int(hy * dy)
 
-    # Transform to the unit square: x=x0+hx*X, y=y0+hy*Y.
+    # Transform to the unit square and multiply by dx^deg1 dy^deg2.
     trans = {}
     for a, b, c in terms:
         if sp.Integer(c) != c:
             raise ValueError(f"non-integer coefficient at {(a, b)}: {c}")
         cint = int(c)
+        scale = pow(dx, deg1 - a) * pow(dy, deg2 - b)
         for i in range(a + 1):
-            cx = comb(a, i) * x0 ** (a - i) * hx**i
+            cx = comb(a, i) * pow(x0n, a - i) * pow(hxn, i)
             for j in range(b + 1):
-                cy = comb(b, j) * y0 ** (b - j) * hy**j
-                trans[(i, j)] = trans.get((i, j), Fraction(0)) + cint * cx * cy
+                cy = comb(b, j) * pow(y0n, b - j) * pow(hyn, j)
+                trans[(i, j)] = trans.get((i, j), 0) + cint * cx * cy * scale
     trans = {k: v for k, v in trans.items() if v}
 
-    wx = [
-        [Fraction(comb(I, i), comb(deg1, i)) if i <= I else Fraction(0) for i in range(deg1 + 1)]
-        for I in range(deg1 + 1)
-    ]
-    wy = [
-        [Fraction(comb(J, j), comb(deg2, j)) if j <= J else Fraction(0) for j in range(deg2 + 1)]
-        for J in range(deg2 + 1)
-    ]
+    lcm_x = _lcm_many(comb(deg1, i) for i in range(deg1 + 1))
+    lcm_y = _lcm_many(comb(deg2, j) for j in range(deg2 + 1))
+    wx = [[0] * (deg1 + 1) for _ in range(deg1 + 1)]
+    wy = [[0] * (deg2 + 1) for _ in range(deg2 + 1)]
+    for I in range(deg1 + 1):
+        for i in range(I + 1):
+            wx[I][i] = comb(I, i) * (lcm_x // comb(deg1, i))
+    for J in range(deg2 + 1):
+        for j in range(J + 1):
+            wy[J][j] = comb(J, j) * (lcm_y // comb(deg2, j))
 
     neg = 0
     zeros = 0
@@ -63,7 +78,7 @@ def bernstein_2d_terms(terms, box1, box2):
     loc = None
     for I in range(deg1 + 1):
         for J in range(deg2 + 1):
-            val = Fraction(0)
+            val = 0
             for (i, j), cc in trans.items():
                 if i <= I and j <= J:
                     val += cc * wx[I][i] * wy[J][j]

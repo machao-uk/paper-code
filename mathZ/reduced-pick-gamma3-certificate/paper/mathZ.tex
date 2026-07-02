@@ -7,6 +7,7 @@
 \usepackage{enumerate}
 \usepackage{tikz}
 \usepackage{float}
+\usepackage{graphicx}
 \usepackage[bookmarks=false]{hyperref}
 \hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue,
   pdftitle={Braid Monodromy of Analytic Matrix Families: Sharp Discriminant Constants and Torus Extensions},
@@ -84,7 +85,8 @@ candidate for all \(n\).  For \(n=4\) we prove the sharp constant
 \(3072R^{11}\).  The non-normal part is reduced to a finite four-point
 Blaschke--Pick certificate; all regular strata are covered by the listed
 analytic/Bernstein certificates, and the only hard Bernstein corner is closed
-by the reproducible blow-up certificate in the supplementary code package.
+by an exact rational blow-up certificate supplied as a reproducible
+supplementary proof object.
 
 Three families illustrate the certificate with complete braid computations.
 For the companion cubic $E^3-3E-k$, the two-puncture monodromy representation
@@ -102,7 +104,7 @@ provides a $B_4$-valued example with explicit certified radius.
 
 \noindent\textbf{Keywords:} braid monodromy; exceptional point; discriminant
 complement; matrix family; configuration space; non-Hermitian matrix;
-combinatorial spectral topology; Nevanlinna--Pick interpolation; certified computation.
+Nevanlinna--Pick interpolation.
 
 \medskip
 \noindent\textbf{MSC 2020:} 15A18, 20F36, 30C15, 14H30, 55R80, 81Q12.
@@ -147,7 +149,7 @@ Section~\ref{sec:tr0constant} proves the quantitative input used later: for
 trace-zero cubic matrices \(\cG_{\tr=0,3}(R)=162R^5\), while for trace-zero
 quartic matrices it proves the sharp constant \(3072R^{11}\), with the
 non-normal reduced Pick certificate supplied in the appendix and accompanying
-code package.  The graph,
+supplementary proof object.  The graph,
 sampling, and adaptive gap certificates occupy
 Sections~\ref{sec:graph}--\ref{sec:adaptive}.  The examples separate two
 cubic arrangements with the same local degree-three flavour but different
@@ -162,7 +164,7 @@ generically a finite set of isolated exceptional points (complex-valued
 versions of the stability theorem cover the cases \(M_{\bbT^2}>0\) and
 \(C\neq\varnothing\) separately.
 Proposition~\ref{prop:T2-no-puncture} and
-Remark~\ref{rem:T2-degenerate-three-zero}
+Proposition~\ref{prop:T2-degenerate-three-zero}
 work out explicit families \(H=gM\) whose braid monodromy maps
 \(\pi_1(\bbT^2)\) and \(\pi_1(\bbT^2\setminus C)\) into the centre
 \(Z(B_3)\), with complete Zariski--van Kampen verification.
@@ -186,7 +188,8 @@ be the unordered configuration space.  The braid group is
 \]
 where $Q_0$ is a chosen unordered base configuration.  Equivalently, a loop
 in $\UConf_n(\bbC)$ is an unordered motion of $n$ distinct points in the
-complex plane, and its homotopy class is a braid.
+complex plane, and its homotopy class is a braid
+\cite{Birman1975,BirmanBrendle2005}.
 
 Let $\cP$ be a connected smooth parameter domain and let
 \[
@@ -281,10 +284,12 @@ discriminant.
 
 The graph certificates below require an operator-norm Lipschitz constant for
 the discriminant on the relevant matrix class.  This section computes these
-constants exactly for $n=2$ and $n=3$ (traceless), gives the current
-traceless $n=4$ bounds and reduction, and states the general conjecture.  The cubic examples in
+constants exactly for $n=2$ and $n=3$ (traceless), proves the traceless
+\(n=4\) sharp constant via a finite Blaschke--Pick certificate, and states the
+general conjecture.  The cubic examples in
 Sections~\ref{sec:nonabelian-cubic} and~\ref{sec:EP3} use the exact constant
-$162R^5$; the quartic example in Section~\ref{sec:local-models} uses the $n=4$ bounds.
+\(162R^5\); the quartic example in Section~\ref{sec:local-models} uses the
+exact \(n=4\) constant.
 
 Let
 \[
@@ -416,9 +421,10 @@ and therefore
 
 \emph{Reduced sharp upper bound.}  By homogeneity it suffices to take \(R=1\).
 The normal strata are handled by \eqref{eq:F4-target} and the subsequent
-unit-circle and mixed-stratum reductions.  For non-normal matrices, Schur
-triangularisation and the finite Blaschke model reduce the problem to the
-rank-one defect model \(S_B\).  The reduced Pick matrix is positive
+unit-circle and mixed-stratum reductions.  For non-normal matrices,
+Proposition~\ref{prop:trace-zero-extreme-reduction} reduces the extremal
+problem to the finite Blaschke compressed-shift model \(S_B\).  The reduced
+Pick matrix is positive
 semidefinite on the centered four-point disk by
 Proposition~\ref{prop:interior-machine-certificate}.  Identity
 \eqref{eq:reduced-pick-recursion} therefore implies positivity of the original
@@ -491,7 +497,7 @@ Writing $u^2=e^{\ii\theta}$, a direct computation gives
   F=32|1-u^2|^3\bigl(|5-u^2|+|5u^2-1|\bigr).
 \]
 This is a one-variable inequality in $\theta$; the maximum over $\theta\in[0,2\pi)$
-is $3072$, attained at $\theta=\pi/2$ (i.e.\ $u=\pm\ii$), which is the square
+is $3072$, attained at $\theta=\pi$ (i.e.\ $u=\pm\ii$), which is the square
 spectrum.  Hence $F\le3072$ on Stratum~1.
 
 \smallskip
@@ -509,7 +515,7 @@ Since $A$, $B$, $C$ are each decreasing in $y$, the left side is maximised
 at $y=-1$, giving $A=(1+x)^2$, $B=(5+x)^2$, $C=(5x+1)^2$.
 Substituting $t=\sqrt{x}\in[0,1]$, the left side of~\eqref{eq:pair-ineq}
 becomes $t^2(1+t^2)^3\cdot\tfrac{1}{t}(t^3+5t^2+5t+1)$, which equals
-$t(1+t^2)^3(1+t)^3$.
+$t(1+t^2)^3(1+t)(t^2+4t+1)$.
 This is increasing on $[0,1]$ and equals $96$ at $t=1$.
 Hence $F\le3072$ on Stratum~2, with equality only at $r=1$, $y=-1$, i.e.\
 the square spectrum.
@@ -699,6 +705,27 @@ limit giving the square spectrum.
 
 \smallskip
 
+\begin{lemma}[Trace-zero analytic curve in Julia parameters]\label{lem:trace-zero-julia-curve}
+Let \(E\) be a complex vector space with \(\dim E\ge2\), and let
+\(h:(E,0)\to(\bbC,0)\) be a holomorphic germ.  Then the analytic set
+\(h^{-1}(0)\) contains a non-constant analytic curve through \(0\).
+\end{lemma}
+
+\begin{proof}
+If \(h\equiv0\), any complex line through \(0\) is such a curve.  Otherwise,
+after a generic linear change of coordinates, the restriction of \(h\) to a
+generic two-plane is a non-zero holomorphic germ in two variables.  By the
+Weierstrass preparation theorem, in suitable coordinates
+\[
+  h(z,w)=U(z,w)\bigl(w^m+a_{m-1}(z)w^{m-1}+\cdots+a_0(z)\bigr),
+  \qquad U(0,0)\ne0,
+\]
+with all \(a_j(0)=0\).  The Weierstrass polynomial has at least one Puiseux
+branch through \((0,0)\); equivalently, the one-equation analytic set has
+positive dimension at the origin.  This gives a non-constant analytic curve
+contained in \(h^{-1}(0)\).
+\end{proof}
+
 
 \begin{proposition}[Trace-zero complex extreme reduction]
 \label{prop:trace-zero-extreme-reduction}
@@ -735,30 +762,39 @@ Let \(T\in\mathcal B_0\) be a non-unitary complex extreme point and put
 \[
   D_L=(I-TT^*)^{1/2},\qquad D_R=(I-T^*T)^{1/2}.
 \]
-The Schur--Julia parametrisation of a neighbourhood of \(T\) in the contraction
-ball gives analytic disks of the form
+The standard Schur--Julia linear-fractional chart for the contraction ball
+\cite{Halmos1982} gives, in a neighbourhood of \(T\), analytic disks of the form
 \[
   T(W)=T+D_LW(I+T^*D_LW)^{-1}D_R
 \]
 for sufficiently small strict contractions \(W:\operatorname{Ran}D_R\to
 \operatorname{Ran}D_L\), with first derivative \(D_LWD_R\) at \(W=0\).
 If \(\operatorname{rank}D_L\,\operatorname{rank}D_R\ge2\), the parameter space
-for \(W\) has complex dimension at least two.  The trace constraint
+for \(W\) has complex dimension at least two.  Put
+\[
+  h(W)=\operatorname{tr}T(W).
+\]
+Since \(T\in\mathcal B_0\), \(h(0)=0\).  The trace constraint
 \[
   \operatorname{tr}T(W)=0
 \]
-is one holomorphic scalar equation whose derivative at the origin is the
-linear functional \(W\mapsto\operatorname{tr}(D_LWD_R)\).  If this functional
-is non-zero, the implicit function theorem leaves a non-constant trace-zero
-analytic disk through \(T\); if it is zero, any non-zero small one-parameter
-direction in the kernel already gives such a disk to first order and the same
-implicit-function argument applies after choosing a transverse parameter.
+is therefore the zero set of one holomorphic scalar germ on a space of
+dimension at least two.  By Lemma~\ref{lem:trace-zero-julia-curve}, there is a
+non-constant analytic curve \(W(s)\), \(W(0)=0\), such that
+\(\operatorname{tr}T(W(s))=0\) identically.  The Schur--Julia map is locally
+injective on a neighbourhood of \(W=0\) in the defect-operator parameter
+space: the inverse formula shows that \(T(W_1)=T(W_2)\) near \(0\) implies
+\(W_1=W_2\).  After deleting any constant component of the analytic curve,
+non-constant \(W(s)\) therefore gives a non-constant trace-zero analytic disk
+\(T(W(s))\) through \(T\).
 This contradicts complex extremality.  Hence
 \[
   \operatorname{rank}D_L\,\operatorname{rank}D_R=1.
 \]
-For a square contraction the two defect ranks are equal, so a non-unitary
-complex extreme point has defect indices \((1,1)\).
+For a square contraction the two defect ranks are equal, since \(T^*T\) and
+\(TT^*\) have the same non-zero singular spectrum and hence the same number
+of singular values strictly smaller than \(1\).  Thus a non-unitary complex
+extreme point has defect indices \((1,1)\).
 
 If a unitary summand is present, the model lies on a boundary stratum already
 included in Proposition~\ref{prop:reduced-boundary-certificates} and the
@@ -837,8 +873,10 @@ If \(\sum_j\lambda_j=0\), then the Pick matrix
 \end{equation}
  is the finite positivity object whose semidefiniteness gives the non-normal
  quartic sharp upper bound.  Proposition~\ref{prop:interior-machine-certificate}
- records the finite certificate route and the local hard-corner closure, but
- the global chamber tables are not printed in this article.
+ records the finite certificate route.  The printed proof gives the analytic
+ reductions and the hard-corner argument; the supplementary manifest gives the
+ finite audit trail for the remaining rational boxes, including file hashes,
+ verifier scripts, and equality-face routing.
 \end{remark}
 
 \begin{proposition}[Pick bound implies the quartic \(3072\) bound]
@@ -882,20 +920,21 @@ The \(H^\infty\) functional calculus for the model contraction gives
 \end{proof}
 
 \begin{lemma}[Reduced Pick recursion]\label{lem:reduced-pick-recursion}
-By the finite Nevanlinna--Pick theorem, \(\Pi_\lambda\succeq0\) is equivalent
+By the finite Nevanlinna--Pick theorem
+\cite{AglMcC02,PauRag14}, \(\Pi_\lambda\succeq0\) is equivalent
 to the existence of a Schur function \(f\in H^\infty(\bbD)\),
 \(\|f\|_\infty\le1\), with
 \[
   f(\lambda_j)=q_\lambda(\lambda_j),\qquad j=1,\ldots,4.
 \]
-Sarason's commutant lifting theorem would then give
+Sarason's commutant lifting theorem~\cite{Sarason1967} gives
 \[
   \|q_\lambda(S_B)\|_2
   =
   \inf\{\|f\|_\infty:\ f(\lambda_j)=q_\lambda(\lambda_j)\}\le1.
 \]
-Thus Remark~\ref{conj:pick-blaschke-certificate} is exactly the remaining
-finite certificate needed for the non-normal sharp \(n=4\) upper bound.
+Thus the finite Pick certificate is precisely the non-normal sharp
+\(n=4\) upper-bound certificate.
 
 Moreover the Pick problem has one further exact reduction.  Since
 \(q_\lambda(0)=0\), write
@@ -1257,7 +1296,8 @@ Schur algorithm to the reduced data, let
   =
   \prod_{m=1}^4(1-|\gamma_m|^2)^{5-m}.
 \]
-Thus the remaining certificate may be stated without determinants: prove
+Thus the interior certificate is equivalently stated without determinants:
+prove
 \[
   |\gamma_m|\le1,\qquad m=1,\ldots,4,
 \]
@@ -1385,32 +1425,41 @@ certificates listed in the supplementary manifest
 \[
   \texttt{mathZ/reduced-pick-gamma3-certificate/MANIFEST.md}.
 \]
-The coverage table is:
-\[
-\begin{array}{c|c|c|c}
-\text{chart/stratum} & \text{pivots} & \text{method} & \text{equality faces}\\ \hline
-K\text{-region/compact core} & \gamma_1,\gamma_2,\gamma_3
-  & \text{finite Bernstein/Schur tables} & \text{none in the open cell}\\
-\text{paired family} & \gamma_1,\gamma_2,\gamma_3
-  & \text{symbolic factor/Sturm} & \text{radial square}\\
-\text{boundary and confluent layers} & \text{all active pivots}
-  & \text{boundary induction and confluent factors} & \text{lower strata}\\
-\text{real boundary face} & \text{pair inequalities}
-  & \text{CRT rational Bernstein} & \text{boundary faces}\\
-3{+}1\text{ boundary layer} & \gamma_1,\gamma_2,\gamma_3
-  & \text{Sturm/Bernstein plus blow-up} & \text{square/confluent}\\
-\text{radial square} & \text{determinant ratio}
-  & \text{explicit factorisation} & \rho=1\\
-\text{one-dimensional family} & \text{reduced pivots}
-  & \text{explicit positive factorisation} & \text{endpoints}\\
-\gamma_3\text{ hard corner} & \gamma_3
-  & \text{ridge blow-up and exact Bernstein} & \text{resolved faces}
-\end{array}
-\]
-The hard-corner verifier hash is
-\[
-  \texttt{473ac0d3875c1c3989ff42f1291b8db4ee104b3e4769283fdc1c754a5568dabc}.
-\]
+The manifest records, for each block, the rational chart, the pivot order,
+denominator positivity, the Bernstein/Sturm verifier, equality-face routing,
+and the SHA256 of the file checked by the verifier.  The audit summary is:
+\begin{center}
+\scriptsize
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{c|c|c|c|c}
+block & domain/object & boxes/support & verifier & equality/hash route\\ \hline
+\(K\)-core & compact chambers & \(\deg\le40\) Schur pivots
+  & rational Bernstein/Schur & no open-cell zeros\\
+paired & \(\{a,-a,b,-b\}\) & degree \(40\) factors
+  & symbolic factor/Sturm & radial square\\
+confluent & \((a,a,b,-2a-b)\) & \(90/76\) support, \(\deg40\)
+  & CRT + Bernstein & lower confluent strata\\
+real boundary & \((1,a,b,-1-a-b)\) & \(861\) coeffs/subtriangle
+  & \(8\)-prime CRT Bernstein & boundary edges; SHA listed\\
+\(3{+}1\) layer & \(\rho,\cos\chi\) & \(\gamma_1,\gamma_2,\gamma_3\)
+  & Sturm/Bernstein & square/confluent faces\\
+radial square & \(\rho\{1,\ii,-1,-\ii\}\) & one-variable factors
+  & exact factor/Sturm & \(\rho=1\)\\
+\(\gamma_3\) corner & \(\rho,y\in[3/4,1]\) & \(Q(4v+vz,v)/v^{11}\)
+  & blow-up + Bernstein & four regions; SHA listed
+\end{tabular}
+}
+\end{center}
+The manifest SHA256 entries used here include:
+\begin{scriptsize}
+\begin{verbatim}
+a08b5007709799b23e5f9e3c61d12f51b380d6d86fed3c9387c0fbbd799835ba  Schur-step certificate log
+b4015dd6e1eae27d976776f9bd4691c2f1aa40f366b2856777454b4f1df23179  real-boundary CRT certificate
+2e921c1afe81ecc4f04dc206bd7c2d3c0a312f5d7d1da80db20c4b7e5405207e  contraction/factor certificates
+a9a38ac97bf92dd240fc5d7a7c25a9ce950c525b4b74603663de4bde656615b6  closed hard-corner output
+473ac0d3875c1c3989ff42f1291b8db4ee104b3e4769283fdc1c754a5568dabc  hard-corner verifier script
+\end{verbatim}
+\end{scriptsize}
 The only box on which the direct Bernstein expansion produces false negative
 coefficients is the third Schur-pivot hard corner in the two-parameter
 \(3{+}1\) chart,
@@ -1719,7 +1768,8 @@ The braid assignment is the induced homomorphism
 \(\beta_{H,G}:\pi_1(G,x_0)\to B_n\), so it sends every relation in
 \(\pi_1(G,x_0)\) to the identity in \(B_n\).  The perturbation statement is
 Theorem~\ref{thm:graph-stab}.  The displayed sphere relation is the standard
-Zariski--van Kampen relation for meridians of a punctured sphere.
+Zariski--van Kampen relation for meridians of a punctured sphere
+\cite{Zariski1929,vanKampen1933,MoishezonTeicher1988,Teicher1997}.
 \end{proof}
 
 \begin{remark}[Why a graph]
@@ -1866,9 +1916,8 @@ $\cG_{\cS}(R_*)$.
 \item Track the eigenvalues along the generator loops to obtain braid words
 $b_1,\ldots,b_m\in B_n$.
 \end{enumerate}
-If a perturbation satisfies the radius in Theorem~\ref{thm:sampled-rep},
-then the same generator list $(b_1,\ldots,b_m)$ is certified for the
-perturbed family.
+Every perturbation satisfying the radius in Theorem~\ref{thm:sampled-rep}
+has the same certified generator list \((b_1,\ldots,b_m)\).
 \end{proposition}
 
 
@@ -2768,8 +2817,11 @@ simultaneous conjugacy.
 
 \begin{proof}
 The Lipschitz estimate gives, pointwise in \(k\),
-\(|\Delta(H_t(k))-\Delta(H(k))|\le\cG_\cS(R_*)\sup\|\widetilde H-H\|_2
-<M_{\bbT^2}/2\),
+\[
+  |\Delta(H_t(k))-\Delta(H(k))|
+  \le \cG_\cS(R_*)\sup\|\widetilde H-H\|_2
+  < M_{\bbT^2}/2,
+\]
 so \(|\Delta(H_t(k))|\ge M_{\bbT^2}/2>0\) for all \(t,k\).  The
 map \((t,k)\mapsto\Lambda_{H_t}(k)\) is therefore a homotopy of
 \(\bbT^2\to\UConf_n(\bbC)\).  Homotopic maps induce equal representations
@@ -2863,8 +2915,10 @@ points.  The group \(\pi_1(\bbT^2\setminus C)\cong F_3\) has generators
 \(a,b,\mu_1,\mu_2\) with relation \([a,b]\mu_1\mu_2=1\).
 Since all eigenvalues of \(H=gM\) rotate rigidly together, every generator
 maps into the centre \(Z(B_3)\); the image is a cyclic group.
-Explicit computations appear in
-Propositions~\ref{prop:T2-no-puncture}--\ref{prop:T2-two-punctures} below.
+The no-puncture case is computed in
+Proposition~\ref{prop:T2-no-puncture}; the diagnostic non-generic scalar
+family in Proposition~\ref{prop:T2-degenerate-three-zero} records what goes
+wrong if the discriminant has an additional non-transverse zero.
 
 \begin{proposition}[Full-torus monodromy, no exceptional points]
 \label{prop:T2-no-puncture}
@@ -2890,12 +2944,14 @@ Therefore
   \phi(\alpha_1)=(\sigma_1\sigma_2)^3,\qquad\phi(\alpha_2)=1,
   \qquad\phi(m,n)=\bigl((\sigma_1\sigma_2)^3\bigr)^m.
 \]
-The image is $\langle(\sigma_1\sigma_2)^3\rangle\cong\bbZ$, a cyclic
-subgroup of $Z(B_3)$.  Theorem~\ref{thm:torus-full} applies with
+The image is the cyclic subgroup
+\(\langle(\sigma_1\sigma_2)^3\rangle\cong\bbZ\) of \(Z(B_3)\).
+Theorem~\ref{thm:torus-full} applies with
 $\cG_{\tr=0,3}(R_*)=162R_*^5$.
 \end{proposition}
 
-\begin{remark}[A non-generic torus scalar example]\label{rem:T2-degenerate-three-zero}
+\begin{proposition}[Diagnostic non-generic torus scalar family]
+\label{prop:T2-degenerate-three-zero}
 Keep $H=gM$ with
 \[
   g(k_1,k_2)=e^{\ii k_1}+0.3e^{-\ii k_1}+0.5e^{\ii k_2}-0.8.
@@ -2919,7 +2975,7 @@ Thus the correct discriminant complement is
 \(\bbT^2\setminus\{p_0,p_1,p_2\}\), not a two-puncture torus.  This example is
 therefore recorded only as a diagnostic non-generic scalar family; it is not
 used as a two-puncture monodromy computation.
-\end{remark}
+\end{proposition}
 
 \begin{proof}
 Write $c=\cos k_1$, $s=\sin k_1$, $C=\cos k_2$, $S=\sin k_2$.  The
@@ -3121,14 +3177,14 @@ already gives total degree \(42\).  The six unordered pairs have respectively
 \#\text{ monomials}&100400&100400&101780&103234&103210&103210 .
 \end{array}
 \]
-Thus the brute-force table is a legitimate finite verification problem, but
-not a practical appendix-level proof.  The proof above uses the second option:
-the lower-dimensional Schur-pivot certificate isolates the radial-square
-degeneration, and Appendix~\ref{app:gamma-three-hard-corner} resolves the only
-hard Bernstein corner by a blow-up.
+Thus the brute-force table is a legitimate finite verification problem, while
+the printed proof uses a smaller certificate: the lower-dimensional
+Schur-pivot certificate isolates the radial-square degeneration, and
+Appendix~\ref{app:gamma-three-hard-corner} resolves the only hard Bernstein
+corner by a blow-up.
 \end{remark}
 
-\begin{remark}[Why this is not an infinite regress]\label{rem:not-infinite-regress}
+\begin{remark}[Finite termination of the certificate]\label{rem:finite-certificate-termination}
 The reduction stops at a finite exact-arithmetic problem.  No new analytic or
 functional-analytic statement remains after
 Proposition~\ref{prop:finite-interior-reduction}: the objects to be checked are
@@ -3364,28 +3420,37 @@ and becomes sharp only at \(r=1\).
 
 \section{Bernstein--Sturm data for the quartic $(3+1)$ monotonicity}\label{app:bernstein-3plus1}
 This appendix lists the Bernstein coefficients in $w=(1+c)/2$ used in the proof that $\partial_c\mathcal B\ge0$.
+\begingroup
+\scriptsize
 \subsection*{$R$}
 Degree in $w$: $2$.
-\begin{align*}
+\[
+\resizebox{\textwidth}{!}{$\begin{aligned}
 b_{0}(r)&=\left(r - 1\right) \left(730 r^{9} - 910 r^{8} - 1355 r^{7} - 1963 r^{6} - 63 r^{5} - 711 r^{4} + 823 r^{3} - 377 r^{2} - 135 r - 135\right),\quad b_{0}(0)=135,\quad b_{0}(1)=0,\quad \text{only the displayed endpoint zero}\\
 b_{1}(r)&=730 r^{10} - 1725 r^{8} + 620 r^{6} + 1534 r^{4} + 242 r^{2} + 135,\quad b_{1}(0)=135,\quad b_{1}(1)=1536,\quad \text{no zero in }(0,1)\\
 b_{2}(r)&=\left(r + 1\right) \left(730 r^{9} + 910 r^{8} - 1355 r^{7} + 1963 r^{6} - 63 r^{5} + 711 r^{4} + 823 r^{3} + 377 r^{2} - 135 r + 135\right),\quad b_{2}(0)=135,\quad b_{2}(1)=8192,\quad \text{no zero in }(0,1)\\
-\end{align*}
+\end{aligned}$}
+\]
 \subsection*{$-E$}
 Degree in $w$: $2$.
-\begin{align*}
+\[
+\resizebox{\textwidth}{!}{$\begin{aligned}
 b_{0}(r)&=- \left(r - 1\right) \left(r + 3\right)^{2} \left(2 r^{2} + r + 1\right) \left(2 r^{5} + 9 r^{4} - 24 r^{3} + 17 r^{2} - 24 r + 36\right),\quad b_{0}(0)=324,\quad b_{0}(1)=0,\quad \text{only the displayed endpoint zero}\\
 b_{1}(r)&=- 4 r^{10} - 235 r^{8} - 69 r^{6} - r^{4} + 369 r^{2} + 324,\quad b_{1}(0)=324,\quad b_{1}(1)=384,\quad \text{no zero in }(0,1)\\
 b_{2}(r)&=- \left(r - 3\right)^{2} \left(r + 1\right) \left(2 r^{2} - r + 1\right) \left(2 r^{5} - 9 r^{4} - 24 r^{3} - 17 r^{2} - 24 r - 36\right),\quad b_{2}(0)=324,\quad b_{2}(1)=1728,\quad \text{no zero in }(0,1)\\
-\end{align*}
+\end{aligned}$}
+\]
 \subsection*{$-N$}
 Degree in $w$: $3$.
-\begin{align*}
+\[
+\resizebox{\textwidth}{!}{$\begin{aligned}
 b_{0}(r)&=- \left(r - 1\right)^{2} \left(r + 3\right)^{2} \left(2 r^{2} + r + 1\right) \left(68 r^{10} + 30 r^{9} - 1204 r^{8} - 421 r^{7} - 653 r^{6} + 2671 r^{5} + 931 r^{4} + 2905 r^{3} - 4067 r^{2} - 1089 r - 3267\right),\quad b_{0}(0)=29403,\quad b_{0}(1)=0,\quad \text{only the displayed endpoint zero}\\
 b_{1}(r)&=- \frac{\left(r - 1\right) \left(408 r^{15} + 1080 r^{14} + 15990 r^{13} - 17634 r^{12} - 63039 r^{11} - 99031 r^{10} - 41407 r^{9} - 48943 r^{8} + 86114 r^{7} + 38610 r^{6} + 17448 r^{5} + 109296 r^{4} + 121557 r^{3} + 227421 r^{2} + 88209 r + 88209\right)}{3},\quad b_{1}(0)=29403,\quad b_{1}(1)=0,\quad \text{only the displayed endpoint zero}\\
 b_{2}(r)&=- \frac{\left(r + 1\right) \left(408 r^{15} - 1080 r^{14} + 15990 r^{13} + 17634 r^{12} - 63039 r^{11} + 99031 r^{10} - 41407 r^{9} + 48943 r^{8} + 86114 r^{7} - 38610 r^{6} + 17448 r^{5} - 109296 r^{4} + 121557 r^{3} - 227421 r^{2} + 88209 r - 88209\right)}{3},\quad b_{2}(0)=29403,\quad b_{2}(1)=49152,\quad \text{no zero in }(0,1)\\
 b_{3}(r)&=- \left(r - 3\right)^{2} \left(r + 1\right)^{2} \left(2 r^{2} - r + 1\right) \left(68 r^{10} - 30 r^{9} - 1204 r^{8} + 421 r^{7} - 653 r^{6} - 2671 r^{5} + 931 r^{4} - 2905 r^{3} - 4067 r^{2} + 1089 r - 3267\right),\quad b_{3}(0)=29403,\quad b_{3}(1)=393216,\quad \text{no zero in }(0,1)\\
-\end{align*}
+\end{aligned}$}
+\]
+\endgroup
 
 
 
@@ -3526,8 +3591,7 @@ The four regions cover the hard corner.  Hence \(P(\rho,y)\ge0\) on the
 corner box, with equality only on faces already certified in the boundary or
 confluent analysis.
 
-For auditability, the exact script and output used to regenerate the numerical
-statements above are
+The exact script and reference output for the hard-corner certificate are
 \[
 \begin{gathered}
 \texttt{mathZ/reduced-pick-gamma3-certificate/reproduce\_gamma3\_hard\_corner.py},\\
@@ -3756,14 +3820,6 @@ Letting \(\varepsilon\to0\) yields
   L\ge 6R^5|\Disc(J_\omega)|=162R^5.
 \]
 The upper and lower bounds coincide, proving Theorem~\ref{thm:tr0-exact}.
-
-
-\section*{Data availability}
-No datasets were generated or analysed during the current study.
-
-\section*{Statements and declarations}
-The author declares no competing interests.  No external funding was used
-for this work.
 
 %% ===================================================================
 \begin{thebibliography}{99}

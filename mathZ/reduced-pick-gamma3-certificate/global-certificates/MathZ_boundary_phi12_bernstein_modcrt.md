@@ -4,18 +4,13 @@ Face: `lambda=(1,a,b,-1-a-b)`, triangle `(-1,-1),(-1,1),(1,-1)`.
 
 - primes: `[1000000007, 1000000009, 1000000021, 1000000033, 1000000087, 1000000093, 1000000097, 1000000103]`
 - Bernstein coefficient count per triangle: `861`
-- Certification criterion: the four depth-1 subtriangles all have nonnegative reconstructed Bernstein coefficients.
+- Certification criterion: all four first-subdivision triangles have nonnegative reconstructed Bernstein coefficients.
 
 ## pair `(1, 2)`
 
+The unsubdivided triangle is included as a coarse reference.  The certificate uses the four first-subdivision triangles below.
 
-## triangle `0`
-- vertices: `((-1, -1), (-1, 1), (1, -1))`
-- rational reconstruction failures: `0`
-- all reconstructed coefficients nonnegative: `False`
-- min coefficient: `-6998697958231790780416/8205150525`
-- max coefficient: `652388939808724926398464/310154689845`
-- zero coefficient count: `0`
+- coarse triangle: reconstruction failures `0`, minimum coefficient `-6998697958231790780416/8205150525`
 
 ## triangle `1`
 - vertices: `((-1, -1), (-1, 0), (0, -1))`
@@ -53,14 +48,9 @@ Face: `lambda=(1,a,b,-1-a-b)`, triangle `(-1,-1),(-1,1),(1,-1)`.
 
 ## pair `(1, 3)`
 
+The unsubdivided triangle is included as a coarse reference.  The certificate uses the four first-subdivision triangles below.
 
-## triangle `0`
-- vertices: `((-1, -1), (-1, 1), (1, -1))`
-- rational reconstruction failures: `0`
-- all reconstructed coefficients nonnegative: `False`
-- min coefficient: `-13645224513574224068608/8503519635`
-- max coefficient: `295629849722257600741376/310154689845`
-- zero coefficient count: `0`
+- coarse triangle: reconstruction failures `0`, minimum coefficient `-13645224513574224068608/8503519635`
 
 ## triangle `1`
 - vertices: `((-1, -1), (-1, 0), (0, -1))`
@@ -98,14 +88,9 @@ Face: `lambda=(1,a,b,-1-a-b)`, triangle `(-1,-1),(-1,1),(1,-1)`.
 
 ## pair `(2, 3)`
 
+The unsubdivided triangle is included as a coarse reference.  The certificate uses the four first-subdivision triangles below.
 
-## triangle `0`
-- vertices: `((-1, -1), (-1, 1), (1, -1))`
-- rational reconstruction failures: `0`
-- all reconstructed coefficients nonnegative: `False`
-- min coefficient: `-13645224513574224068608/8503519635`
-- max coefficient: `295629849722257600741376/310154689845`
-- zero coefficient count: `0`
+- coarse triangle: reconstruction failures `0`, minimum coefficient `-13645224513574224068608/8503519635`
 
 ## triangle `1`
 - vertices: `((-1, -1), (-1, 0), (0, -1))`
