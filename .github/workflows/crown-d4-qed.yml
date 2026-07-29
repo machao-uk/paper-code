@@ -1,0 +1,54 @@
+name: Crown d4 QED computation
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+jobs:
+  compute:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential autoconf automake libtool libgmp-dev libmpfr-dev libflint-dev
+          python3 -m pip install --break-system-packages sympy==1.14.0
+      - name: Build msolve
+        run: |
+          git clone --depth 1 --branch v0.10.1 https://github.com/algebraic-solving/msolve.git /tmp/msolve
+          cd /tmp/msolve
+          ./autogen.sh
+          ./configure
+          make -j2
+          ./msolve -h | head -40
+      - name: Generate exact obstruction system
+        run: |
+          python3 crown_d4_qed_ci/build_d4_g10.py | tee crown_d4_qed_ci/build.log
+          python3 crown_d4_qed_ci/factor_d4_g10.py | tee crown_d4_qed_ci/factor.log
+          python3 crown_d4_qed_ci/export_msolve_inputs.py | tee crown_d4_qed_ci/export.log
+      - name: Compute F29 Groebner basis and parametrization
+        run: |
+          mkdir -p crown_d4_qed_ci/work/results
+          /tmp/msolve/msolve -t 2 -v 2 -g 2 -f crown_d4_qed_ci/work/cas/d4_degree7_10_F29.ms -o crown_d4_qed_ci/work/results/F29_gb.out 2>&1 | tee crown_d4_qed_ci/work/results/F29_gb.log
+          /tmp/msolve/msolve -t 2 -v 2 -f crown_d4_qed_ci/work/cas/d4_degree7_10_F29.ms -o crown_d4_qed_ci/work/results/F29_solve.out 2>&1 | tee crown_d4_qed_ci/work/results/F29_solve.log
+      - name: Exclude complement of Jstd over F29
+        run: |
+          set -e
+          for i in 0 1 2 3; do
+            /tmp/msolve/msolve -t 2 -v 2 -f crown_d4_qed_ci/work/cas/d4_outside_Jstd_${i}_F29.ms -o crown_d4_qed_ci/work/results/F29_outside_${i}.out 2>&1 | tee crown_d4_qed_ci/work/results/F29_outside_${i}.log
+          done
+      - name: Cross-check F31
+        run: |
+          /tmp/msolve/msolve -t 2 -v 2 -f crown_d4_qed_ci/work/cas/d4_degree7_10_F31.ms -o crown_d4_qed_ci/work/results/F31_solve.out 2>&1 | tee crown_d4_qed_ci/work/results/F31_solve.log
+      - name: Record hashes
+        if: always()
+        run: |
+          find crown_d4_qed_ci -type f -print0 | sort -z | xargs -0 sha256sum > crown_d4_qed_ci/MANIFEST.sha256
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: crown-d4-qed-results
+          path: crown_d4_qed_ci
+          if-no-files-found: error
+          retention-days: 30
