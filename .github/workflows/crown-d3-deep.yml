@@ -1,0 +1,38 @@
+name: Crown d3 deep elimination
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+jobs:
+  deep:
+    strategy:
+      fail-fast: false
+      matrix:
+        chart: [0,1,2,3,4,5,6]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential autoconf automake libtool libgmp-dev libmpfr-dev libflint-dev
+          python3 -m pip install --break-system-packages sympy==1.14.0
+      - name: Build msolve
+        run: |
+          git clone --depth 1 --branch v0.10.1 https://github.com/algebraic-solving/msolve.git /tmp/msolve
+          cd /tmp/msolve && ./autogen.sh && ./configure && make -j2
+      - name: Generate full d3 system through degree 13 over F7
+        run: |
+          mkdir -p crown_d3_qed_ci/deep
+          timeout 3600 python3 crown_d3_qed_ci/build_abstract_tail_system.py 3 13 7 ${{ matrix.chart }} crown_d3_qed_ci/deep/d3_N13_F7_chart${{ matrix.chart }}.ms | tee crown_d3_qed_ci/deep/build_chart${{ matrix.chart }}.log
+      - name: Prove chart empty over algebraic closure
+        run: |
+          timeout 5400 /tmp/msolve/msolve -t 2 -v 2 -g 2 -f crown_d3_qed_ci/deep/d3_N13_F7_chart${{ matrix.chart }}.ms -o crown_d3_qed_ci/deep/gb_chart${{ matrix.chart }}.out 2>&1 | tee crown_d3_qed_ci/deep/gb_chart${{ matrix.chart }}.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: crown-d3-deep-F7-chart${{ matrix.chart }}
+          path: crown_d3_qed_ci/deep
+          if-no-files-found: warn
+          retention-days: 30
