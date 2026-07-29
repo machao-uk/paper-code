@@ -12,18 +12,27 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y build-essential autoconf automake libtool libgmp-dev libmpfr-dev libflint-dev
-      - name: Build msolve
+      - name: Build and bundle msolve
         run: |
           git clone --depth 1 --branch v0.10.1 https://github.com/algebraic-solving/msolve.git /tmp/msolve
           cd /tmp/msolve
           ./autogen.sh
           ./configure
           make -j2
-          mkdir -p /tmp/msolve-artifact
-          cp msolve /tmp/msolve-artifact/
-          ldd msolve > /tmp/msolve-artifact/ldd.txt
+          mkdir -p /tmp/msolve-artifact/bin /tmp/msolve-artifact/lib
+          cp .libs/msolve /tmp/msolve-artifact/bin/
+          cp src/neogb/.libs/libneogb.so* /tmp/msolve-artifact/lib/
+          ldd .libs/msolve | tee /tmp/msolve-artifact/ldd.txt
+          ldd .libs/msolve | awk '/=> \/|^\// {for(i=1;i<=NF;i++) if($i ~ /^\//) print $i}' | sort -u | while read f; do cp -L "$f" /tmp/msolve-artifact/lib/; done
+          cat > /tmp/msolve-artifact/run-msolve <<'SH'
+          #!/bin/sh
+          HERE=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+          LD_LIBRARY_PATH="$HERE/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}" exec "$HERE/bin/msolve" "$@"
+          SH
+          chmod +x /tmp/msolve-artifact/run-msolve
+          /tmp/msolve-artifact/run-msolve -h >/tmp/msolve-artifact/help.txt 2>&1 || true
       - uses: actions/upload-artifact@v4
         with:
-          name: msolve-ubuntu-24.04
+          name: msolve-ubuntu-24.04-bundle
           path: /tmp/msolve-artifact
           retention-days: 30
