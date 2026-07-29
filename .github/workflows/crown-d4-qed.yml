@@ -26,20 +26,21 @@ jobs:
           python3 crown_d4_qed_ci/build_d4_g10.py | tee crown_d4_qed_ci/build.log
           python3 crown_d4_qed_ci/factor_d4_g10.py | tee crown_d4_qed_ci/factor.log
           python3 crown_d4_qed_ci/export_msolve_inputs.py | tee crown_d4_qed_ci/export.log
-      - name: Compute discriminant-saturated F29 ideal
+      - name: Characteristic-zero complement certificate
         run: |
           mkdir -p crown_d4_qed_ci/work/results
-          /tmp/msolve/msolve -t 2 -v 2 -g 2 -f crown_d4_qed_ci/work/cas/d4_saturated_F29.ms -o crown_d4_qed_ci/work/results/F29_sat_gb.out 2>&1 | tee crown_d4_qed_ci/work/results/F29_sat_gb.log
-          /tmp/msolve/msolve -t 2 -v 2 -f crown_d4_qed_ci/work/cas/d4_saturated_F29.ms -o crown_d4_qed_ci/work/results/F29_sat_solve.out 2>&1 | tee crown_d4_qed_ci/work/results/F29_sat_solve.log
-      - name: Exclude saturated complement of Jstd over F29
-        run: |
           set -e
           for i in 0 1 2 3; do
-            /tmp/msolve/msolve -t 2 -v 2 -f crown_d4_qed_ci/work/cas/d4_saturated_outside_Jstd_${i}_F29.ms -o crown_d4_qed_ci/work/results/F29_sat_outside_${i}.out 2>&1 | tee crown_d4_qed_ci/work/results/F29_sat_outside_${i}.log
+            /tmp/msolve/msolve -t 2 -v 2 -f crown_d4_qed_ci/work/cas/d4_saturated_outside_Jstd_${i}_Q.ms -o crown_d4_qed_ci/work/results/Q_sat_outside_${i}.out 2>&1 | tee crown_d4_qed_ci/work/results/Q_sat_outside_${i}.log
+            grep -q 'No solution' crown_d4_qed_ci/work/results/Q_sat_outside_${i}.log
           done
-      - name: Cross-check saturated F31
+      - name: Finite-field independent cross-check
         run: |
-          /tmp/msolve/msolve -t 2 -v 2 -f crown_d4_qed_ci/work/cas/d4_saturated_F31.ms -o crown_d4_qed_ci/work/results/F31_sat_solve.out 2>&1 | tee crown_d4_qed_ci/work/results/F31_sat_solve.log
+          /tmp/msolve/msolve -t 2 -v 2 -f crown_d4_qed_ci/work/cas/d4_saturated_F29.ms -o crown_d4_qed_ci/work/results/F29_sat_solve.out 2>&1 | tee crown_d4_qed_ci/work/results/F29_sat_solve.log
+          for i in 0 1 2 3; do
+            /tmp/msolve/msolve -t 2 -v 2 -f crown_d4_qed_ci/work/cas/d4_saturated_outside_Jstd_${i}_F29.ms -o crown_d4_qed_ci/work/results/F29_sat_outside_${i}.out 2>&1 | tee crown_d4_qed_ci/work/results/F29_sat_outside_${i}.log
+            grep -q 'No solution' crown_d4_qed_ci/work/results/F29_sat_outside_${i}.log
+          done
       - name: Record hashes
         if: always()
         run: |
@@ -47,7 +48,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: crown-d4-qed-saturated-results
+          name: crown-d4-qed-characteristic-zero-results
           path: crown_d4_qed_ci
           if-no-files-found: error
           retention-days: 30
