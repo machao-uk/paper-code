@@ -47,8 +47,11 @@ def write(path,variables,char,polys):
 for p in (13,17,19,23,29,31):write(OUT/f'd4_degree7_10_F{p}.ms',VARS,p,[expr(g,p) for g in GENS])
 write(OUT/'d4_degree7_10_Q.ms',VARS,0,[expr(g) for g in GENS])
 h=['A-B^2+B','C-B^2+1','D-B^2','B^3-B^2-2*B+1']
+delta='A*B*C*D*(A-1)*(B-1)*(C-1)*(D-1)*(A-B)*(A-C)*(A-D)*(B-C)*(B-D)*(C-D)'
 for char in (0,13,29,31):
  suffix='Q' if char==0 else f'F{char}';base=[expr(g,None if char==0 else char) for g in GENS]
- for i,hi in enumerate(h):write(OUT/f'd4_outside_Jstd_{i}_{suffix}.ms',('T',)+VARS,char,base+[f'1-T*({hi})'])
+ write(OUT/f'd4_saturated_{suffix}.ms',('S',)+VARS,char,base+[f'1-S*({delta})'])
+ for i,hi in enumerate(h):
+  write(OUT/f'd4_saturated_outside_Jstd_{i}_{suffix}.ms',('T','S')+VARS,char,base+[f'1-S*({delta})',f'1-T*({hi})'])
 print('MSOLVE INPUT EXPORT: PASS')
 print('generators:',[(n,len(g)) for n,g in zip(NAMES,GENS)])
