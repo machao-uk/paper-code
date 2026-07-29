@@ -1,0 +1,38 @@
+name: Crown d3 QED computation
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+jobs:
+  compute:
+    strategy:
+      fail-fast: false
+      matrix:
+        chart: [0,1,2,3,4,5,6]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential autoconf automake libtool libgmp-dev libmpfr-dev libflint-dev
+          python3 -m pip install --break-system-packages sympy==1.14.0
+      - name: Build msolve
+        run: |
+          git clone --depth 1 --branch v0.10.1 https://github.com/algebraic-solving/msolve.git /tmp/msolve
+          cd /tmp/msolve && ./autogen.sh && ./configure && make -j2
+      - name: Generate d3 system through degree 5
+        run: |
+          mkdir -p crown_d3_qed_ci/work
+          python3 crown_d3_qed_ci/build_abstract_tail_system.py 3 5 29 ${{ matrix.chart }} crown_d3_qed_ci/work/d3_N5_F29_chart${{ matrix.chart }}.ms | tee crown_d3_qed_ci/work/build_chart${{ matrix.chart }}.log
+      - name: Solve chart over F29
+        run: |
+          /tmp/msolve/msolve -t 2 -v 2 -f crown_d3_qed_ci/work/d3_N5_F29_chart${{ matrix.chart }}.ms -o crown_d3_qed_ci/work/solve_chart${{ matrix.chart }}.out 2>&1 | tee crown_d3_qed_ci/work/solve_chart${{ matrix.chart }}.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: crown-d3-N5-F29-chart${{ matrix.chart }}
+          path: crown_d3_qed_ci/work
+          if-no-files-found: error
+          retention-days: 30
